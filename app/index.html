@@ -1,0 +1,97 @@
+<html lang="en" data-theme="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Liminal Market - Liberate your stock</title>
+    <link rel="shortcut icon" href="https://app.liminal.market/img/logos/default_logo.png"/>
+    <link rel="stylesheet" href="./css/pico.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <div id="logo"><img src="./img/logo.png" alt="Liminal.market logo"/> Liminal.market</div>
+</header>
+<main class="container">
+
+    <div class="grid">
+        <canvas id="myChart"></canvas>
+        <article>TVL now and tvl changes in chart</article>
+        <article>Volume last 24 hours & Volume last X days in chart</article>
+    </div>
+    <article>
+        List out top symbols
+        - number
+        - logo
+        - name
+        - price
+        - volume24H
+        - TVL
+    </article>
+
+    <article>
+        List out top users
+        - address_short
+        - volume24H
+        - TVL
+    </article>
+
+    <article>
+        Last transactions
+        - address_short
+        - symbol
+        - filledQty
+        - filledAvgPrice
+        - time
+    </article>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.2/chart.min.js"
+        integrity="sha512-zjlf0U0eJmSo1Le4/zcZI51ks5SjuQXkU0yOdsOBubjSmio9iCUp8XPLkEAADZNBdR9crRy3cniZ65LF2w8sRA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="module" src="./js/bundle.js?d=4"></script>
+<script type="module">
+
+
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
