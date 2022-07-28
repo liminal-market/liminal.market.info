@@ -13,85 +13,35 @@
     <link href="./css/style.css" rel="stylesheet"/>
 </head>
 <body>
-<header>
-    <div id="logo"><img src="./img/logo.png" alt="Liminal.market logo"/> Liminal.market</div>
+<header class="header">
+    <div id="logo"><img src="./img/logo.png" alt="Liminal.market logo"/> Liminal.market analytics</div>
 </header>
-<main class="container">
-
-    <div class="grid">
-        <canvas id="myChart"></canvas>
-        <article>TVL now and tvl changes in chart</article>
-        <article>Volume last 24 hours & Volume last X days in chart</article>
+<main class="container" id="main">
+    <input type="search" id="search" placeholder="Search address, contract or symbol" />
+    <div aria-invalid="false">
+        Liminal.market uses <a href="https://thegraph.com/" target="_blank">TheGraph</a> to index the blockchain.
+        You can do you own queries using GraphQL.
+        There are predefined templates for you to play with. <a href="https://thegraph.com/hosted-service/subgraph/liminal-market/liminal-market" target="_blank">Check it out.</a>
     </div>
-    <article>
-        List out top symbols
-        - number
-        - logo
-        - name
-        - price
-        - volume24H
-        - TVL
-    </article>
+    <div class="grid" id="topGrid">
 
+    </div>
+    <div id="middleGrid"></div>
     <article>
-        List out top users
-        - address_short
-        - volume24H
-        - TVL
-    </article>
-
-    <article>
-        Last transactions
-        - address_short
-        - symbol
-        - filledQty
-        - filledAvgPrice
-        - time
+        Analytics code is available on <a href="https://github.com/liminal-market/liminal.market.info" target="_blank">github.com/liminal-market</a>.
+        <br />
+        GraphQL code is available on  <a href="https://github.com/liminal-market/liminal.market.thegraph" target="_blank">github.com/liminal-market</a>.
+        <br />
+        You can find us at <a href="https://liminal.market">liminal.market</a>
     </article>
 </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
+        integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.2/chart.min.js"
         integrity="sha512-zjlf0U0eJmSo1Le4/zcZI51ks5SjuQXkU0yOdsOBubjSmio9iCUp8XPLkEAADZNBdR9crRy3cniZ65LF2w8sRA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="module" src="./js/bundle.js?d=4"></script>
-<script type="module">
 
-
-
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
 </body>
 </html>

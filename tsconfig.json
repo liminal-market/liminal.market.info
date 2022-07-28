@@ -11,13 +11,18 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "typeRoots": ["node_modules/@types", "types"],
+    "paths": {
+      "Handlebars": [
+        "./app/node_modules/handlebars"
+      ]
+    }
   },
   "exclude": [
     "node_modules"
   ],
   "include": ["./src/html/*.html"],
-  "files": [
-    "./src/main.ts",
+  "files": ["./src/.d.ts",
+    "./src/main.ts","./src/html.d.ts"
   ],
   "compileOnSave": true
 }

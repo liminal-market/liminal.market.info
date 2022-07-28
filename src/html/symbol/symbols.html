@@ -1,0 +1,26 @@
+<article>
+    <h2>Symbols</h2>
+    <table class="stocks_table">
+        <tr>
+            <th colspan="2">#</th>
+            <th>Shares</th>
+            <th>USD</th>
+        </tr>
+        {{#each symbols}}
+        <tr>
+            <td><img src="{{logo}}" alt="{{id}} logo" /></td>
+            <td><a href="" class="symbol">{{id}}</a></td>
+            <td>{{number tvl}}</td>
+            <td>{{calcValue this}}</td>
+        </tr>
+        {{/each}}
+        <tfoot>
+        <tr>
+            <td colspan="4" class="paging">
+                <a role="button" href="" class="prev" data-page="-1" class="none">< Prev</a>
+                <a role="button" href="" class="next" data-page="1">Next ></a>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</article>

@@ -1,0 +1,31 @@
+<article class="stocks_table">
+    <h2>{{Title}}</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Symbol</th>
+            <th>Description</th>
+            <th>Side</th>
+            <th>Address</th>
+            <th>Filled Qty</th>
+            <th>Avg. Price</th>
+            <th>Filled at</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each orders}}
+        <tr>
+            <td><img src="{{symbol.logo}}" alt="Logo" /></td>
+            <td><a href="" class="symbol">{{symbol.id}}</a></td>
+            <td>{{{orderDesc this}}}</td>
+            <td>{{side}}</td>
+            <td><a href="" class="wallet" data-address="{{id}}">{{address recipient}}</a></td>
+            <td>{{number filledQty}}</td>
+            <td>{{currency filledAvgPrice}}</td>
+            <td>{{{formatDate filledAt}}}</td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</article>

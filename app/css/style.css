@@ -1,0 +1,23 @@
+:root {
+    --spacing:0.6rem;
+
+}
+.header {
+    background-color: #040633;
+    color:#fff;
+    padding:0;
+}
+
+.stocks_table img {
+    max-width: 34px;
+    max-height: 34px;
+    padding-left: 4px;
+}
+
+.paging {
+    text-align: center;
+}
+
+.none {
+    display: none;
+}

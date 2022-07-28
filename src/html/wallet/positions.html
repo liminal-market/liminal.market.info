@@ -1,0 +1,18 @@
+<article>
+    <h2>Top positions</h2>
+    <table class="stocks_table">
+        <tr>
+            <th colspan="2">#</th>
+            <th>Shares</th>
+            <th>USD</th>
+        </tr>
+        {{#each positions}}
+        <tr>
+            <td><img src="{{symbol.logo}}" alt="{{symbol.id}} logo" /></td>
+            <td><a href="" class="symbol">{{symbol.id}}</a></td>
+            <td>{{number qty}}</td>
+            <td>{{calcValue this}}</td>
+        </tr>
+        {{/each}}
+    </table>
+</article>

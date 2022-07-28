@@ -1,0 +1,19 @@
+<article>
+    <h4>{{symbol.id}}</h4>
+    <div class="grid">
+
+        <div><img src="{{symbol.logo}}" width="200"></div>
+        <div>
+            <h3>Basic information</h3>
+            <ul>
+                <li>Price per share:${{symbol.pricePerShare}}</li>
+                <li>Last update: {{symbol.priceLastUpdated}}</li>
+                <li>Total shares locked: {{symbol.tvl}}</li>
+                <li>Usd value: {{symbol.tvlUsd}}</li>
+                <li>Contract address: <a href="https://mumbai.polygonscan.com/address/{{symbol.contract}}" target="_blank">{{symbol.contract}}</a></li>
+                <li><a href="https://strike.market/stocks/{{symbol.id}}" target="_blank">More detailed information about {{symbol.id}}</a></li>
+            </ul>
+        </div>
+
+    </div>
+</article>
