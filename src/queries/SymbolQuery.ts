@@ -32,6 +32,9 @@ export default class SymbolQuery {
             tvlUsd
             tvlUsdWei
             contract
+            users {
+              id
+            }
         }`);
         queryBuilder.add(query);
     }

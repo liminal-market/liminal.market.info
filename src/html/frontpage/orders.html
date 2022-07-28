@@ -1,5 +1,6 @@
 <article class="stocks_table">
     <h2>{{Title}}</h2>
+    <figure>
     <table>
         <thead>
         <tr>
@@ -20,12 +21,13 @@
             <td><a href="" class="symbol">{{symbol.id}}</a></td>
             <td>{{{orderDesc this}}}</td>
             <td>{{side}}</td>
-            <td><a href="" class="wallet" data-address="{{id}}">{{address recipient}}</a></td>
-            <td>{{number filledQty}}</td>
-            <td>{{currency filledAvgPrice}}</td>
-            <td>{{{formatDate filledAt}}}</td>
+            <td><a href="" class="wallet" data-address="{{user.id}}">{{address user.id}}</a></td>
+            <td title="{{filledQty}}">{{number filledQty}}</td>
+            <td title="{{filledAvgPrice}}">{{currency filledAvgPrice}}</td>
+            <td title="{{isoDate filledAt}}">{{{formatDate filledAt}}}</td>
         </tr>
         {{/each}}
         </tbody>
     </table>
+    </figure>
 </article>

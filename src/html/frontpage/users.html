@@ -1,5 +1,6 @@
 <article class="stocks_table">
     <h2>{{Title}}</h2>
+    <figure>
     <table>
         <thead>
         <tr>
@@ -15,11 +16,12 @@
         <tr>
             <td>#</td>
             <td><a href="" class="wallet" data-address="{{id}}">{{address id}}</a></td>
-            <td>${{volume24H orders}}</td>
+            <td>{{volume24H orders}}</td>
             <td>{{tvl positions}}</td>
             <td>{{{logos positions}}}</td>
         </tr>
         {{/each}}
         </tbody>
     </table>
+    </figure>
 </article>

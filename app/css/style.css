@@ -1,11 +1,18 @@
 :root {
     --spacing:0.6rem;
-
+    --typography-spacing-vertical: 0.1rem;
+}
+h1, h2, h3, h4 {
+    margin-bottom: 0.4rem;
 }
 .header {
     background-color: #040633;
     color:#fff;
     padding:0;
+}
+#logo a {
+    text-decoration: none;
+    color:#fff;
 }
 
 .stocks_table img {
@@ -20,4 +27,21 @@
 
 .none {
     display: none;
+}
+
+.copy {
+    content:' [copy]'
+}
+
+article {
+    margin: 1rem 0rem;
+    padding: 1rem 1rem;
+}
+
+#graphInfo {
+   /* background-image: url('../img/The-Graph-Logo.png');
+    background-repeat: no-repeat;
+    background-position: 10px 90px;
+    padding-left: 70px;
+    background-size: 50px;*/
 }

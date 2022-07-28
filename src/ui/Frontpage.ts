@@ -4,7 +4,7 @@ import OpenGraphRepository from "../repositories/OpenGraphRepository";
 import QueryBuilder from "../queries/QueryBuilder";
 import TvlHtml from '../html/frontpage/tvl.html'
 import VolumeHtml from '../html/frontpage/volume.html'
-import TopHtml from '../html/frontpage/top.html';
+import SymbolsHtml from '../html/frontpage/symbols.html';
 import UserHtml from '../html/frontpage/users.html';
 import OrderHtml from '../html/frontpage/orders.html';
 
@@ -13,6 +13,8 @@ import SymbolQuery from "../queries/SymbolQuery";
 import UserQuery from "../queries/UserQuery";
 import OrderQuery from "../queries/OrderQuery";
 import UIHelper from "./UIHelper";
+import SymbolPage from "./SymbolPage";
+import LinkHandler from "./LinkHandler";
 
 export default class Frontpage {
 
@@ -48,13 +50,13 @@ export default class Frontpage {
         return new Date(date.getTime() + (days * 24 * 60 * 60 * 1000));
     }
 
-    public renderVolume(dayData: any): [string, string, boolean] {
+    public renderVolume(dayDatas: any): [string, string, boolean] {
         const template = Handlebars.compile(VolumeHtml);
-        let content = template({Volume: '13900000'});
+        let content = template({Volume: dayDatas[0].volumeUsd});
 
         UIHelper.addToTopContent(content);
 
-        return [dayData, 'volumeCanvas', false];
+        return [dayDatas, 'volumeCanvas', false];
     }
 
     public renderLiminalInfo(liminalMarketInfo: any, dayData: any): [string, string, boolean] {
@@ -75,7 +77,7 @@ export default class Frontpage {
 
         let data: any = [];
 
-        for (let i = 0; i < dayData.length; i++) {
+        for (let i = dayData.length-1; i >= 0; i--) {
             let day = dayData[i];
             let dateStr = new Date(parseFloat(day.date)).toDateString();
             let y = parseFloat(day.tvlUSD);
@@ -88,13 +90,19 @@ export default class Frontpage {
         let ctx = (document.getElementById(elementId)! as HTMLCanvasElement).getContext('2d')!;
         const myChart = new Chart(ctx, {
             type: 'bar',
-            options: {},
+            options: {
+                plugins: {
+                    legend : {
+                        display:false
+                    }
+                }
+            },
             data: {
                 datasets: [{
                     backgroundColor: '#040633',
                     barPercentage: 0.5,
                     barThickness: 6,
-                    label: elementId,
+                    label: '',
                     data: data
                 }]
             }
@@ -105,10 +113,11 @@ export default class Frontpage {
 
 
     private renderSymbols(symbols: any) {
-        const template = Handlebars.compile(TopHtml);
+        const template = Handlebars.compile(SymbolsHtml);
         let content = template({Title: 'Top stocks', symbols: symbols});
 
         UIHelper.appendToMiddleGrid(content);
+
     }
 
 
@@ -133,7 +142,7 @@ export default class Frontpage {
                     total += amount;
                 }
             }
-            return total;
+            return UIHelper.formatCurrency(total);
         })
 
         Handlebars.registerHelper('tvl', (positions: any) => {
@@ -146,12 +155,12 @@ export default class Frontpage {
 
                 total += qty * pricePerShare;
             }
-            return total;
+            return UIHelper.formatCurrency(total);
         })
 
         Handlebars.registerHelper('logos', (positions: any) => {
             let str = '';
-            for (let i = 0; i < positions.length; i++) {
+            for (let i = 0; i<10 && i < positions.length; i++) {
                 let position = positions[i];
 
                 let qty = parseFloat(position.qty);

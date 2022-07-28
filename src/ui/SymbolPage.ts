@@ -8,7 +8,7 @@ import SymbolQuery from "../queries/SymbolQuery";
 
 
 export default class SymbolPage {
-    first = 5;
+    first = 10;
     skip = 0;
     page = 0;
 
@@ -51,6 +51,7 @@ export default class SymbolPage {
 
         UIHelper.addToTopContent(content);
         this.checkPagingButtons();
+
         let buttons = document.querySelectorAll('.stocks_table .paging');
         for (let i=0;i<buttons.length;i++) {
             buttons[i].addEventListener('click', async (evt) => {
@@ -58,10 +59,12 @@ export default class SymbolPage {
                 let element = (evt.target as HTMLElement);
                 let direction = parseInt(element.dataset["page"]!.toString());
                 if (direction > 0) {
-                    this.skip += this.first * ++this.page;
+                    this.skip = this.first * ++this.page;
                 } else {
-                    this.skip -= this.first * --this.page;
+                    this.skip = this.first * --this.page;
                 }
+
+                console.log('skip:', this.skip, 'first', this.first, 'page', this.page);
 
                 let queryBuilder = new QueryBuilder();
                 SymbolQuery.loadBySymbols(queryBuilder, this.first, this.skip);

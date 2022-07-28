@@ -1,9 +1,11 @@
 <article class="stocks_table">
-    <h2>{{Title}}</h2>
+    <h2>{{Title}} - <small><a href="" id="allSymbols">View all</a></small></h2>
+
+    <figure>
     <table>
         <thead>
         <tr>
-            <th>#</th>
+            <th></th>
             <th>Name</th>
             <th>Price</th>
             <th>Shares</th>
@@ -13,7 +15,7 @@
         <tbody>
     {{#each symbols}}
     <tr>
-        <td><img src="{{logo}}" alt="{{id}} logo" /></td>
+        <td style="width:35px"><img src="{{logo}}" alt="{{id}} logo" /></td>
         <td><a href="" class="symbol">{{id}}</a></td>
         <td>{{currency pricePerShare}}</td>
         <td>{{number tvl}}</td>
@@ -22,4 +24,5 @@
     {{/each}}
         </tbody>
     </table>
+    </figure>
 </article>

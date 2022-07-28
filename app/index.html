@@ -14,15 +14,19 @@
 </head>
 <body>
 <header class="header">
-    <div id="logo"><img src="./img/logo.png" alt="Liminal.market logo"/> Liminal.market analytics</div>
+    <div id="logo"><a href="./"><img src="./img/logo.png" alt="Liminal.market logo"/> Liminal.market analytics</a></div>
 </header>
 <main class="container" id="main">
     <input type="search" id="search" placeholder="Search address, contract or symbol" />
-    <div aria-invalid="false">
+    <article aria-invalid="false" id="graphInfo">
+        This is a demo page to demonstrate the power of open data.
+        Checkout the code at <a href="https://github.com/liminal-market/liminal.market.info" target="_blank">github.com</a>
+        <br /><br />
         Liminal.market uses <a href="https://thegraph.com/" target="_blank">TheGraph</a> to index the blockchain.
         You can do you own queries using GraphQL.
         There are predefined templates for you to play with. <a href="https://thegraph.com/hosted-service/subgraph/liminal-market/liminal-market" target="_blank">Check it out.</a>
-    </div>
+
+    </article>
     <div class="grid" id="topGrid">
 
     </div>

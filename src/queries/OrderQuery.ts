@@ -5,7 +5,10 @@ export default class OrderQuery {
 
     public static loadNewestOrders(queryBuilder: QueryBuilder) {
         let str = `orders(first: 20, orderBy: filledAt, orderDirection: desc) {
-        id
+        id 
+        user {
+            id
+        },
         recipient
         symbol {
             id

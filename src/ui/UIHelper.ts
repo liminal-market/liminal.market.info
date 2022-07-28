@@ -1,6 +1,8 @@
 import moment from "moment";
+import EmailFormHtml from "../html/emailform.html";
 
 export default class UIHelper {
+    static middleCount = 0;
     public static addToTopContent(content: string) {
         let topGrid = document.getElementById('topGrid')!;
         topGrid.innerHTML += content;
@@ -8,6 +10,13 @@ export default class UIHelper {
     public static appendToMiddleGrid(content: string) {
         let middleGrid = document.getElementById('middleGrid')!;
         middleGrid.innerHTML += content;
+
+        this.middleCount++;
+        if (this.middleCount == 1) {
+            const template = Handlebars.compile(EmailFormHtml);
+            content = template({});
+            middleGrid.innerHTML += content;
+        }
     }
 
     public static clearContent() {
@@ -16,6 +25,7 @@ export default class UIHelper {
 
         let middleGrid = document.getElementById('middleGrid')!;
         middleGrid.innerHTML = '';
+        this.middleCount = 0;
     }
 
     public static registerHandlebarHelpers() {
@@ -25,10 +35,14 @@ export default class UIHelper {
             return m.fromNow();
         })
 
+        Handlebars.registerHelper('isoDate', (timestamp: string) => {
+            let date = new Date(parseFloat(timestamp));
+            return date.toISOString();
+        })
+
         Handlebars.registerHelper('address', (address: string) => {
             return address.substring(0, 5) + '...' + address.substring(address.length - 5);
         })
-
         Handlebars.registerHelper('currency', (str: any) => {
             return this.formatCurrency(str);
         })
