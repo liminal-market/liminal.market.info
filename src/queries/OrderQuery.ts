@@ -6,7 +6,7 @@ export default class OrderQuery {
     public static loadNewestOrders(queryBuilder: QueryBuilder) {
         let str = `orders(first: 20, orderBy: filledAt, orderDirection: desc) {
         id 
-        user {
+        wallet {
             id
         },
         recipient
@@ -25,9 +25,9 @@ export default class OrderQuery {
         queryBuilder.add(query);
     }
 
-    public static loadOrdersOnRecipient(address : string, queryBuilder : QueryBuilder) {
+    public static loadOrdersOnWallet(address : string, queryBuilder : QueryBuilder) {
         let str = `
-            user(id:"` + address + `")
+            wallet(id:"` + address + `")
             {
                 id
                 currentAUsdBalance
@@ -59,7 +59,7 @@ export default class OrderQuery {
             }
         `;
 
-        let query = new Query('user', str);
+        let query = new Query('wallet', str);
         queryBuilder.add(query);
 
     }

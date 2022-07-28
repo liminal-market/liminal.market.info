@@ -1,7 +1,8 @@
 import Query from "./Query";
 import QueryBuilder from "./QueryBuilder";
+import BaseQuery from "./BaseQuery";
 
-export default class SymbolQuery {
+export default class SymbolQuery extends BaseQuery {
 
     public static loadMostPopular(queryBuilder : QueryBuilder) {
 
@@ -21,7 +22,7 @@ export default class SymbolQuery {
 
     public static loadBySymbolId(symbol : string, queryBuilder : QueryBuilder) {
         let query = new Query('symbol',
-            `symbol(id:"` + symbol +`") {
+            `symbol(id:"` + symbol.toUpperCase() +`") {
             id
             logo
             pricePerShare
@@ -32,7 +33,7 @@ export default class SymbolQuery {
             tvlUsd
             tvlUsdWei
             contract
-            users {
+            wallets {
               id
             }
         }`);
@@ -56,5 +57,19 @@ export default class SymbolQuery {
         queryBuilder.add(query);
     }
 
+    public static async loadAllSymbols(queryBuilder? : QueryBuilder) {
+        let query = new Query('symbols',
+            `symbols {
+            id           
+        }`);
+        if (queryBuilder) {
+            queryBuilder.add(query);
+        } else {
+            return await super.run(query);
+        }
+    }
+    public static async getAllSymbols() {
+        return (await this.loadAllSymbols()).symbols;
+    }
 
 }

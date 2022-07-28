@@ -3,6 +3,8 @@ import Wallet from "./ui/Wallet";
 import Search from "./ui/Search";
 import LinkHandler from "./ui/LinkHandler";
 import SymbolPage from "./ui/SymbolPage";
+import SymbolQuery from "./queries/SymbolQuery";
+import SymbolLogic from "./queries/SymbolLogic";
 
 export default class main {
 
@@ -21,6 +23,9 @@ export default class main {
 
         let linkHandler = new LinkHandler();
         linkHandler.bind();
+
+        let symbolLogic = new SymbolLogic();
+        symbolLogic.init();
     }
 }
 

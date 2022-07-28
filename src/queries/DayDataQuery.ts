@@ -13,7 +13,7 @@ export default class DayDataQuery {
                 tvlUSD
                 volumeUsd
                 txCount
-                userCount
+                walletCount
                 symbolCount
             }
         `

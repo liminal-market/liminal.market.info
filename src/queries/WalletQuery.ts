@@ -1,11 +1,11 @@
 import QueryBuilder from "./QueryBuilder";
 import Query from "./Query";
 
-export default class UserQuery {
+export default class WalletQuery {
 
-    public static loadUserPositionsNewestFirst(queryBuilder : QueryBuilder) {
+    public static loadWalletPositionsNewestFirst(queryBuilder : QueryBuilder) {
         let str = `
-  users(first: 10, orderBy: lastOrderAt, orderDirection: desc) {
+  wallets(first: 10, orderBy: lastOrderAt, orderDirection: desc) {
     id
     orders(first: 10, orderBy: filledAt, orderDirection: desc){
       filledQty
@@ -27,7 +27,7 @@ export default class UserQuery {
   }
 
 `
-        let queue = new Query('users', str);
+        let queue = new Query('wallet', str);
         queryBuilder.add(queue);
     }
 

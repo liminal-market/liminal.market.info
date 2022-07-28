@@ -1,13 +1,13 @@
 <article>
-    <h4>{{address user.id}}</h4>
+    <h4>{{address wallet.id}}</h4>
     <div class="grid">
 
-        <div><img src="https://effigy.im/a/{{user.id}}.png" width="200"></div>
+        <div><img src="https://effigy.im/a/{{wallet.id}}.png" width="200"></div>
         <div>
             <h3>Basic information</h3>
             <ul>
-                <li>aUSD:{{currency user.currentAUsdBalance}}</li>
-                <li>Total stocks: {{user.orders.length}}</li>
+                <li>aUSD:{{currency wallet.currentAUsdBalance}}</li>
+                <li>Total stocks: {{wallet.orders.length}}</li>
                 <li>Total value: $129.332</li>
             </ul>
         </div>

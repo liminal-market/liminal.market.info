@@ -45,3 +45,14 @@ article {
     padding-left: 70px;
     background-size: 50px;*/
 }
+
+#backBtn {
+    background-image: var(--icon-chevron);
+    background-position: center left .75rem;
+    background-size: 1rem auto;
+    background-repeat: no-repeat;
+    margin:1rem 2rem 1rem 0rem;
+    padding-left: 3rem;
+    transform: rotate(90deg);
+
+}

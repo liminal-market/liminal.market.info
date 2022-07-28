@@ -11,7 +11,7 @@ export default class LiminalMarketInfo {
                 txCount
                 tvlAUSD
                 tvlSymbolUSD
-                userCount
+                walletCount
                 symbolCount
                 lastOrderAt
             }

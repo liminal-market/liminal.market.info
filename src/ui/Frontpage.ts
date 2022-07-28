@@ -5,16 +5,17 @@ import QueryBuilder from "../queries/QueryBuilder";
 import TvlHtml from '../html/frontpage/tvl.html'
 import VolumeHtml from '../html/frontpage/volume.html'
 import SymbolsHtml from '../html/frontpage/symbols.html';
-import UserHtml from '../html/frontpage/users.html';
+import WalletHtml from '../html/frontpage/wallets.html';
 import OrderHtml from '../html/frontpage/orders.html';
 
 import {Chart, registerables} from "chart.js";
 import SymbolQuery from "../queries/SymbolQuery";
-import UserQuery from "../queries/UserQuery";
+import WalletQuery from "../queries/WalletQuery";
 import OrderQuery from "../queries/OrderQuery";
 import UIHelper from "./UIHelper";
 import SymbolPage from "./SymbolPage";
 import LinkHandler from "./LinkHandler";
+import 'chartjs-adapter-moment';
 
 export default class Frontpage {
 
@@ -31,7 +32,7 @@ export default class Frontpage {
 
         })
         SymbolQuery.loadMostPopular(queryBuilder);
-        UserQuery.loadUserPositionsNewestFirst(queryBuilder);
+        WalletQuery.loadWalletPositionsNewestFirst(queryBuilder);
         OrderQuery.loadNewestOrders(queryBuilder);
 
         let openGraphRepository = new OpenGraphRepository();
@@ -40,7 +41,7 @@ export default class Frontpage {
         let chart1 = this.renderLiminalInfo(result.liminalMarketInfos[0], result.dayDatas)
         let chart2 = this.renderVolume(result.dayDatas);
         this.renderSymbols(result.symbols);
-        this.renderUsers(result.users);
+        this.renderWallets(result.wallets);
         this.renderOrders(result.orders);
         this.generateChart(...chart1);
         this.generateChart(...chart2);
@@ -83,7 +84,7 @@ export default class Frontpage {
             let y = parseFloat(day.tvlUSD);
             if (!isTvl) y = parseFloat(day.volumeUsd);
 
-            data[i] = {x: dateStr, y: y}
+            data[i] = {x: parseFloat(day.date), y: y}
         }
 
 
@@ -95,12 +96,23 @@ export default class Frontpage {
                     legend : {
                         display:false
                     }
+                },
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'month',
+                            displayFormats: {
+                                month: 'MMM'
+                            }
+                        }
+                    }
                 }
             },
             data: {
                 datasets: [{
                     backgroundColor: '#040633',
-                    barPercentage: 0.5,
+                    barPercentage: 0.9,
                     barThickness: 6,
                     label: '',
                     data: data
@@ -126,7 +138,7 @@ export default class Frontpage {
         return (currentTime > (date.getTime() + minutes * 60 * 1000));
     };
 
-    private renderUsers(users: any) {
+    private renderWallets(wallets: any) {
         Handlebars.registerHelper('volume24H', (orders: any) => {
             let total = 0;
             for (let i = 0; i < orders.length; i++) {
@@ -171,8 +183,8 @@ export default class Frontpage {
             return str;
         })
 
-        const template = Handlebars.compile(UserHtml);
-        let content = template({Title: 'Top user', users: users});
+        const template = Handlebars.compile(WalletHtml);
+        let content = template({Title: 'Top wallets', wallets: wallets});
 
         UIHelper.appendToMiddleGrid(content);
     }

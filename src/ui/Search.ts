@@ -3,6 +3,7 @@ import Frontpage from "./Frontpage";
 import LinkHandler from "./LinkHandler";
 import UIHelper from "./UIHelper";
 import SymbolPage from "./SymbolPage";
+import SymbolLogic from "../queries/SymbolLogic";
 
 export default class Search {
 
@@ -13,7 +14,6 @@ export default class Search {
 
         search.addEventListener('keyup', async (evt) => {
             let input = evt.target as HTMLInputElement;
-            console.log('length:' + input.value.length)
             if (input.value.length == 42) {
                 let wallet = new Wallet();
                 await wallet.render(input.value);
@@ -25,7 +25,8 @@ export default class Search {
                 evt.stopPropagation();
             }
 
-            if (input.value.length == 4) {
+
+            if (SymbolLogic.isSymbol(input.value)) {
                 let symbolPage = new SymbolPage();
                 await symbolPage.render(input.value);
 

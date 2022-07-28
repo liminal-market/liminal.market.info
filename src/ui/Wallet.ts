@@ -15,21 +15,21 @@ export default class Wallet {
         UIHelper.registerHandlebarHelpers();
 
         let queryBuilder = new QueryBuilder();
-        OrderQuery.loadOrdersOnRecipient(address, queryBuilder);
+        OrderQuery.loadOrdersOnWallet(address, queryBuilder);
 
         let openGraphRepository = new OpenGraphRepository();
         let result = await openGraphRepository.execute(queryBuilder.getQuery())
-        let user = result.user;
+        let wallet = result.wallet;
 
         UIHelper.clearContent();
-        this.renderUser(user);
-        this.renderPositions(user.positions)
-        this.renderOrders(user.orders)
+        this.renderInfo(wallet);
+        this.renderPositions(wallet.positions)
+        this.renderOrders(wallet.orders)
     }
 
-    private renderUser(user: any) {
+    private renderInfo(wallet: any) {
         const template = Handlebars.compile(InfoHtml);
-        let content = template({user: user});
+        let content = template({wallet: wallet});
 
         UIHelper.addToTopContent(content);
     }
