@@ -88,7 +88,6 @@ export default class Frontpage {
 
             data[idx++] = {x: dateStr, y: y}
         }
-        console.log(data);
 
         let ctx = (document.getElementById(elementId)! as HTMLCanvasElement).getContext('2d')!;
         const myChart = new Chart(ctx, {

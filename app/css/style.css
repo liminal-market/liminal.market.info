@@ -66,3 +66,7 @@ article {
 #breadcrumb > nav > ul > li.no_crumb:after {
     content: '';
 }
+
+.symbolInfo {
+    grid-template-columns: 1fr 2fr;
+}

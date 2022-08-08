@@ -1,18 +1,20 @@
 <article>
     <h4>{{symbol.id}}</h4>
-    <div class="grid">
+    <div class="grid symbolInfo">
 
         <div><img src="{{symbol.logo}}" width="200"></div>
         <div>
             <h3>Basic information</h3>
             <ul>
                 <li>Price per share:${{symbol.pricePerShare}} (updated: {{formatDate symbol.priceLastUpdated}})</li>
-                <li>Total shares locked: {{number symbol.tvl}}</li>
-                <li>Usd value: {{currency symbol.tvlUsd}}</li>
+                <li>Total shares locked: {{number symbol.tsl}}</li>
+                <li>Cost from user: {{currency symbol.cost}}</li>
+                <li>Current value: {{currency symbol.value}}</li>
+                <li>Total orders: {{number symbol.txCount}}</li>
                 <li>Contract address: <a href="https://mumbai.polygonscan.com/address/{{symbol.contract}}" target="_blank" class="wallet" data-address="{{symbol.contract}}">{{address symbol.contract}}</a></li>
-                <li><a href="https://strike.market/stocks/{{symbol.id}}" target="_blank">More detailed information about {{symbol.id}}</a></li>
             </ul>
         </div>
 
     </div>
+    <img src="./img/strikemarket-logo.png" width="50"> <a href="https://strike.market/stocks/{{symbol.id}}" target="_blank">More detailed information about {{symbol.id}}</a>
 </article>

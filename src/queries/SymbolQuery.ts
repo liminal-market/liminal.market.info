@@ -33,6 +33,8 @@ export default class SymbolQuery extends BaseQuery {
             cost
             costWei
             contract
+            txCount
+            value
             wallets {
               id
             }
@@ -52,6 +54,8 @@ export default class SymbolQuery extends BaseQuery {
             tslWei
             cost
             costWei
+            txCount
+            value
             contract
         }`);
         queryBuilder.add(query);

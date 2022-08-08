@@ -2,9 +2,7 @@ import QueryBuilder from "./QueryBuilder";
 import Query from "./Query";
 
 export default class OrderQuery {
-
-    public static loadNewestOrders(queryBuilder: QueryBuilder) {
-        let str = `orders(first: 20, orderBy: filledAt, orderDirection: desc) {
+    static properies = `
         id 
         wallet {
             id
@@ -19,12 +17,21 @@ export default class OrderQuery {
         filledQty
         filledAvgPrice
         filledAt
-        commission
-    }`
+        commission`;
+
+
+    public static loadNewestOrders(queryBuilder: QueryBuilder) {
+        let str = `orders(first: 20, orderBy: filledAt, orderDirection: desc) {` + this.properies + `}`;
+
         let query = new Query('orders', str);
         queryBuilder.add(query);
     }
+    public static loadNewestOrdersBySymbol(queryBuilder: QueryBuilder, symbol : string) {
+        let str = `orders(where :{ symbol:"` + symbol + `"} first: 20, orderBy: filledAt, orderDirection: desc) {` + this.properies + `}`;
 
+        let query = new Query('orders', str);
+        queryBuilder.add(query);
+    }
     public static loadOrdersOnWallet(address : string, queryBuilder : QueryBuilder) {
         let str = `
             wallet(id:"` + address + `")

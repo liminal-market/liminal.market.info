@@ -1,0 +1,19 @@
+<article>
+    <h2>{{Title}}</h2>
+    <table class="stocks_table">
+        <tr>
+            <th></th>
+            <th>Wallet</th>
+            <th>Shares</th>
+            <th>USD</th>
+        </tr>
+        {{#each positions}}
+        <tr>
+            <td><img src="{{symbol.logo}}" alt="{{symbol.id}} logo" /></td>
+            <td><a href="" class="wallet" data-address="{{wallet.id}}">{{address wallet.id}}</a></td>
+            <td>{{number tsl}}</td>
+            <td>{{calcValue this}}</td>
+        </tr>
+        {{/each}}
+    </table>
+</article>
