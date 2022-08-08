@@ -51,12 +51,15 @@ article {
 #main {
     padding-top: 0;
 }
-#graphInfo {
+#graphInfo, #gsheetInfo {
     background-image: url('../img/The-Graph-Logo.png');
     background-repeat: no-repeat;
     background-position: 10px center;
     padding-left: 70px;
     background-size: 50px;
+}
+#gsheetInfo {
+    background-image: url('../img/gsheet.png');
 }
 
 #backBtn {
