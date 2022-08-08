@@ -12,6 +12,7 @@ body {
     background-color: #040633;
     color:#fff;
     padding:0;
+    margin-bottom: 1rem;
 }
 #headerLinks {
     text-align: right;
@@ -78,7 +79,15 @@ article {
 #breadcrumb > nav > ul > li.no_crumb:after {
     content: '';
 }
-
+#logo > .grid {
+    grid-template-columns: 1fr 3fr;
+}
+.logo-text {
+    margin-top:1rem;
+}
+.logo-text em {
+    font-size:0.7rem;
+}
 .symbolInfo {
     grid-template-columns: 1fr 2fr;
 }
@@ -108,7 +117,7 @@ article {
 #copyGraphQL {
     position: absolute;
     top:70px;
-    right:30px;
+    right:40px;
 }
 .chart {
     background-color: #fff;

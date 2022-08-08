@@ -82,6 +82,7 @@ export default class LinkHandler {
                     copyLink.dataset['tooltip'] = 'Copied!';
                     setTimeout(() => {
                         copyLink.dataset['tooltip'] = 'Copy GraphQL';
+                        copyLink.blur();
                     }, 2000)
                 })
                 modal.setAttribute('open', '');
