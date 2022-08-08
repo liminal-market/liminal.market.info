@@ -14,7 +14,7 @@
         <tbody>
         {{#each orders}}
         <tr>
-            <td>{{side}}</td>
+            <td><a href="https://mumbai.polygonscan.com/tx/{{id}}" target="_blank">{{side}}</a></td>
             <td>{{number filledQty}}</td>
             <td>${{filledAvgPrice}}</td>
             <td>{{{formatDate filledAt}}}</td>

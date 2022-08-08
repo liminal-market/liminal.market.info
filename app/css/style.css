@@ -5,10 +5,20 @@
 h1, h2, h3, h4 {
     margin-bottom: 0.4rem;
 }
+body {
+    font-family: 'JetBrains Mono', monospace;
+}
 .header {
     background-color: #040633;
     color:#fff;
     padding:0;
+}
+#headerLinks {
+    text-align: right;
+    padding: 2rem 1rem;
+}
+#headerLinks a {
+    color:#fff;
 }
 #logo a {
     text-decoration: none;
@@ -102,4 +112,10 @@ article {
 }
 .chart {
     background-color: #fff;
+}
+
+@media (max-width: 800px) {
+    #headerLinks {
+        display: none;
+    }
 }

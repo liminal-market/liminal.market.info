@@ -8,7 +8,6 @@
         <tr>
             <th>#</th>
             <th>Symbol</th>
-            <th>Description</th>
             <th>Side</th>
             <th>Address</th>
             <th>Filled Qty</th>
@@ -21,8 +20,7 @@
         <tr>
             <td><img src="{{symbol.logo}}" alt="Logo" /></td>
             <td><a href="" class="symbol">{{symbol.id}}</a></td>
-            <td>{{{orderDesc this}}}</td>
-            <td>{{side}}</td>
+            <td><a href="https://mumbai.polygonscan.com/tx/{{id}}" target="_blank">{{side}}</a></td>
             <td><a href="" class="wallet" data-address="{{wallet.id}}">{{address wallet.id}}</a></td>
             <td title="{{filledQty}}">{{number filledQty}}</td>
             <td title="{{filledAvgPrice}}">{{currency filledAvgPrice}}</td>

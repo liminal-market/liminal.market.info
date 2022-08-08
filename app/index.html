@@ -9,19 +9,27 @@
     <link rel="stylesheet" href="./css/pico.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200&display=swap" rel="stylesheet">
     <link href="./css/style.css?d=5" rel="stylesheet"/>
 </head>
 <body>
 <header class="container header">
-    <div id="logo"><a href="./"><img src="./img/logo.png" alt="Liminal.market logo" width="100"/> Liminal.market
-        analytics</a></div>
+    <div class="grid">
+        <div id="logo"><a href="./"><img src="./img/logo.png" alt="Liminal.market logo" width="100"/> Liminal.market
+            analytics</a></div>
+        <div id="headerLinks">
+            <a href="https://liminal.market">Back to liminal.market</a>
+            |
+            <a href="https://app.liminal.market">Trade</a>
+        </div>
+    </div>
 </header>
 <main class="container" id="main">
 
     <article>
         Welcome to liminal.market analytics. The data on this page is the information created when users buy and
-        sell their shares on the liminal.market platform. The data doesn't represent real value, all trades are done in a sandbox.
+        sell their shares on the liminal.market platform. The data doesn't represent real value, all trades are done in
+        a sandbox.
     </article>
     <!--<a href="" id="backBtn">Back</a>-->
     <input type="search" id="search" placeholder="Search address, contract or symbol"/>
@@ -65,18 +73,20 @@
 
         <article>
             <header><a href="#close"
-               aria-label="Close"
-               class="close"
-               data-target="modal"
-               onClick="document.getElementById('modal').removeAttribute('open')">
+                       aria-label="Close"
+                       class="close"
+                       data-target="modal"
+                       onClick="document.getElementById('modal').removeAttribute('open')">
             </a>
                 GraphQL
             </header>
             <p>
-            <a href="" id="copyGraphQL" data-tooltip="Copy GraphQL"><img src="./img/copy.png" /></a>
+                <a href="" id="copyGraphQL" data-tooltip="Copy GraphQL"><img src="./img/copy.png"/></a>
 
-            Copy the GraphQL code in the textarea, and visit <a href="https://thegraph.com/hosted-service/subgraph/liminal-market/liminal-market" target="_blank">TheGraph Playground</a>
-            to query the data.<br />
+                Copy the GraphQL code in the textarea, and visit <a
+                    href="https://thegraph.com/hosted-service/subgraph/liminal-market/liminal-market" target="_blank">TheGraph
+                Playground</a>
+                to query the data.<br/>
             <pre rows="6" cols="30" id="graphQLArea"></pre>
             </p>
         </article>

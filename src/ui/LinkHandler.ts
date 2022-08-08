@@ -27,8 +27,8 @@ export default class LinkHandler {
                 linkHandler.bind();
             })
             let address = (walletLinks[i] as HTMLElement).dataset['address']!.toString();
-            ;
-            walletLinks[i].parentElement!.insertAdjacentHTML("beforeend", '&nbsp;<a href="" data-copy="' + address + '" class="copy">[c]</a>');
+
+            walletLinks[i].parentElement!.insertAdjacentHTML("beforeend", '&nbsp;<a href="" data-copy="' + address + '" class="copy" data-tooltip="Copy address"><img src="./img/copy.png" /></a>');
 
         }
 
@@ -111,7 +111,14 @@ export default class LinkHandler {
         Array.from(copyLinks).forEach((element) => {
             element.addEventListener('click', async (evt) => {
                 evt.preventDefault();
-                await this.copyFunction(element as HTMLElement);
+
+                let e = element as HTMLElement;
+                await this.copyFunction(e);
+                e.dataset['tooltip'] = 'Copied!';
+                setTimeout(() => {
+                    e.dataset['tooltip'] = 'Copy address';
+                    e.blur();
+                }, 2000);
             });
         })
     }
