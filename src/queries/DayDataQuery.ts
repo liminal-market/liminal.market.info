@@ -10,8 +10,8 @@ export default class DayDataQuery {
             dayDatas(first: 365, orderBy: date, orderDirection: desc) {
                 id
                 date
-                tvlUSD
-                volumeUsd
+                cost
+                shares
                 txCount
                 walletCount
                 symbolCount

@@ -9,7 +9,7 @@
                 <li>Price per share:${{symbol.pricePerShare}} (updated: {{formatDate symbol.priceLastUpdated}})</li>
                 <li>Total shares locked: {{number symbol.tvl}}</li>
                 <li>Usd value: {{currency symbol.tvlUsd}}</li>
-                <li>Contract address: <a href="https://mumbai.polygonscan.com/address/{{symbol.contract}}" target="_blank">{{symbol.contract}}</a></li>
+                <li>Contract address: <a href="https://mumbai.polygonscan.com/address/{{symbol.contract}}" target="_blank" class="wallet" data-address="{{symbol.contract}}">{{address symbol.contract}}</a></li>
                 <li><a href="https://strike.market/stocks/{{symbol.id}}" target="_blank">More detailed information about {{symbol.id}}</a></li>
             </ul>
         </div>

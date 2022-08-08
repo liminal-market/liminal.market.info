@@ -8,12 +8,13 @@ export default class LiminalMarketInfo {
         let q = `
             liminalMarketInfos {
                 id
-                txCount
-                tvlAUSD
-                tvlSymbolUSD
                 walletCount
-                symbolCount
+                symbolCount                
+                txCount
                 lastOrderAt
+                cash
+                cost
+                value
             }
         `;
         let query = new Query('liminalMarketInfos', q);

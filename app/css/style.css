@@ -39,11 +39,11 @@ article {
 }
 
 #graphInfo {
-   /* background-image: url('../img/The-Graph-Logo.png');
+    background-image: url('../img/The-Graph-Logo.png');
     background-repeat: no-repeat;
-    background-position: 10px 90px;
+    background-position: 10px center;
     padding-left: 70px;
-    background-size: 50px;*/
+    background-size: 50px;
 }
 
 #backBtn {
@@ -55,4 +55,14 @@ article {
     padding-left: 3rem;
     transform: rotate(90deg);
 
+}
+#breadcrumb > nav > ul > li {
+    padding-right:1px
+}
+#breadcrumb > nav > ul > li:after {
+    padding-left:6px;
+    content: '/'
+}
+#breadcrumb > nav > ul > li.no_crumb:after {
+    content: '';
 }

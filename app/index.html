@@ -14,29 +14,49 @@
 </head>
 <body>
 <header class="container header">
-    <div id="logo"><a href="./"><img src="./img/logo.png" alt="Liminal.market logo" width="100"/> Liminal.market analytics</a></div>
+    <div id="logo"><a href="./"><img src="./img/logo.png" alt="Liminal.market logo" width="100"/> Liminal.market
+        analytics</a></div>
 </header>
 <main class="container" id="main">
-    <!--<a href="" id="backBtn">Back</a>-->
-    <input type="search" id="search" placeholder="Search address, contract or symbol" />
-    <article aria-invalid="false" id="graphInfo">
-        This is a demo page to demonstrate the power of open data.
-        Checkout the code at <a href="https://github.com/liminal-market/liminal.market.info" target="_blank">github.com</a>
-        <br /><br />
-        Liminal.market uses <a href="https://thegraph.com/" target="_blank">TheGraph</a> to index the blockchain.
-        You can do you own queries using GraphQL.
-        There are predefined templates for you to play with. <a href="https://thegraph.com/hosted-service/subgraph/liminal-market/liminal-market" target="_blank">Check it out.</a>
 
+    <article>
+        Welcome to liminal.market analytics. The data on this page is the information created when users buy and
+        sell their shares on the liminal.market platform. The data doesn't represent real value, all trades are done in a sandbox.
+    </article>
+    <!--<a href="" id="backBtn">Back</a>-->
+    <input type="search" id="search" placeholder="Search address, contract or symbol"/>
+    <article id="breadcrumb">
+        <nav>
+            <ul>
+                <li><a href="/">Frontpage</a></li>
+                <li><a href="/">Stocks</a></li>
+                <li class="no_crumb"><a href="/">AAPL</a></li>
+            </ul>
+        </nav>
     </article>
     <div class="grid" id="topGrid">
 
     </div>
     <div id="middleGrid"></div>
+    <article id="graphInfo">
+        Liminal.market uses <a href="https://thegraph.com/" target="_blank">TheGraph</a> to index the blockchain.
+        You can do you own queries using GraphQL.
+        There are predefined templates for you to play with. <a
+            href="https://thegraph.com/hosted-service/subgraph/liminal-market/liminal-market" target="_blank">Check it
+        out.</a>
+    </article>
     <article>
+        This is a demo page to demonstrate the power of open data.
+        Checkout the code at <a href="https://github.com/liminal-market/liminal.market.info"
+                                target="_blank">github.com</a>
+        <br/><br/>
+
+
         Analytics code is available on <a href="https://github.com/liminal-market/liminal.market.info" target="_blank">github.com/liminal-market</a>.
-        <br />
-        GraphQL code is available on  <a href="https://github.com/liminal-market/liminal.market.thegraph" target="_blank">github.com/liminal-market</a>.
-        <br />
+        <br/>
+        GraphQL code is available on <a href="https://github.com/liminal-market/liminal.market.thegraph"
+                                        target="_blank">github.com/liminal-market</a>.
+        <br/>
         You can find us at <a href="https://liminal.market">liminal.market</a>
     </article>
 </main>

@@ -52,11 +52,12 @@ export default class UIHelper {
         })
 
         Handlebars.registerHelper('calcValue', (obj: any) => {
-            if (obj.qty) {
-                return this.formatCurrency(parseFloat(obj.qty) * parseFloat(obj.symbol.pricePerShare))
+            if (obj.symbol) {
+                return this.formatCurrency(parseFloat(obj.tsl) * parseFloat(obj.symbol.pricePerShare))
             } else {
-                return this.formatCurrency(parseFloat(obj.tvl) * parseFloat(obj.pricePerShare))
+                return this.formatCurrency(parseFloat(obj.tsl) * parseFloat(obj.pricePerShare))
             }
+
         })
 
     }

@@ -15,7 +15,7 @@ export default class OrderQuery {
             logo
         }
         side
-        qty
+        tsl
         filledQty
         filledAvgPrice
         filledAt
@@ -30,7 +30,7 @@ export default class OrderQuery {
             wallet(id:"` + address + `")
             {
                 id
-                currentAUsdBalance
+                cash
                 orders(first: 10, orderBy: filledAt, orderDirection: desc) {
                 id
                 side
@@ -38,12 +38,12 @@ export default class OrderQuery {
                     id
                     logo
                 }
-                qty
+                tsl
                 filledQty
                 filledAvgPrice
                 filledAt
             }
-                positions(orderBy: qty, orderDirection: desc) {
+                positions(orderBy: tsl, orderDirection: desc) {
                 id
                 symbol {
                     id
@@ -51,10 +51,10 @@ export default class OrderQuery {
                     pricePerShare
                     priceLastUpdated
                     contract
-                    tvl
+                    tsl
                 }
-                qty
-                aUSDAmount
+                tsl
+                cost
             }
             }
         `;

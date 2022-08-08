@@ -16,6 +16,7 @@ import UIHelper from "./UIHelper";
 import SymbolPage from "./SymbolPage";
 import LinkHandler from "./LinkHandler";
 import 'chartjs-adapter-moment';
+import moment from "moment";
 
 export default class Frontpage {
 
@@ -29,6 +30,7 @@ export default class Frontpage {
             this.renderLiminalInfo(result, result);
         });
         DayDataQuery.loadLast365DataDaysNewestFirst(queryBuilder, (result) => {
+
 
         })
         SymbolQuery.loadMostPopular(queryBuilder);
@@ -53,7 +55,7 @@ export default class Frontpage {
 
     public renderVolume(dayDatas: any): [string, string, boolean] {
         const template = Handlebars.compile(VolumeHtml);
-        let content = template({Volume: dayDatas[0].volumeUsd});
+        let content = template({Volume: dayDatas[0].cost});
 
         UIHelper.addToTopContent(content);
 
@@ -64,7 +66,7 @@ export default class Frontpage {
         let mainDiv = document.getElementById('main');
         if (!mainDiv) return ['', '', false];
 
-        liminalMarketInfo.TVL = parseFloat(liminalMarketInfo.tvlAUSD) + parseFloat(liminalMarketInfo.tvlSymbolUSD);
+        liminalMarketInfo.TVL = parseFloat(liminalMarketInfo.cash) + parseFloat(liminalMarketInfo.value);
 
         const template = Handlebars.compile(TvlHtml);
         let content = template(liminalMarketInfo);
@@ -77,47 +79,78 @@ export default class Frontpage {
     private generateChart(dayData: any, elementId: string, isTvl = true) {
 
         let data: any = [];
-
+        let idx = 0;
         for (let i = dayData.length-1; i >= 0; i--) {
             let day = dayData[i];
-            let dateStr = new Date(parseFloat(day.date)).toDateString();
-            let y = parseFloat(day.tvlUSD);
-            if (!isTvl) y = parseFloat(day.volumeUsd);
+            let dateStr = moment(new Date(parseFloat(day.date))).format('YYYY-MM-DD'); ;
+            let y = parseFloat(day.cost);
+            if (!isTvl) y = parseFloat(day.shares);
 
-            data[i] = {x: parseFloat(day.date), y: y}
+            data[idx++] = {x: dateStr, y: y}
         }
-
+        console.log(data);
 
         let ctx = (document.getElementById(elementId)! as HTMLCanvasElement).getContext('2d')!;
         const myChart = new Chart(ctx, {
             type: 'bar',
+           options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: ''
+                    }
+                },
+               scales : {
+                   y: {
+                    min:0
+                   }
+               }
+            },
+            data: {
+                datasets: [{
+                    backgroundColor: '#040633',
+                    barPercentage: 1,
+                    barThickness: 30,
+                    label: '',
+                    data: data,
+                }]
+            },
+
+/*
             options: {
                 plugins: {
                     legend : {
                         display:false
                     }
                 },
+
                 scales: {
                     x: {
                         type: 'time',
+                        grid : {
+
+                        },
                         time: {
                             unit: 'month',
                             displayFormats: {
                                 month: 'MMM'
-                            }
-                        }
+                            },
+                            minUnit: 'day',
+                            round: 'day',
+
+                        },
+
+                    },
+                    y : {
+                        min: 1
                     }
                 }
-            },
-            data: {
-                datasets: [{
-                    backgroundColor: '#040633',
-                    barPercentage: 0.9,
-                    barThickness: 6,
-                    label: '',
-                    data: data
-                }]
-            }
+            },*/
+
         });
 
         return myChart;
@@ -162,10 +195,10 @@ export default class Frontpage {
             for (let i = 0; i < positions.length; i++) {
                 let position = positions[i];
 
-                let qty = parseFloat(position.qty);
+                let tsl = parseFloat(position.tsl);
                 let pricePerShare = parseFloat(position.symbol.pricePerShare);
 
-                total += qty * pricePerShare;
+                total += tsl * pricePerShare;
             }
             return UIHelper.formatCurrency(total);
         })
@@ -204,7 +237,7 @@ export default class Frontpage {
         UIHelper.registerHandlebarHelpers();
 
         const template = Handlebars.compile(OrderHtml);
-        let content = template({Title: 'Latest transactions', orders: orders});
+        let content = template({Title: 'Latest orders', orders: orders});
 
         UIHelper.appendToMiddleGrid(content);
     }

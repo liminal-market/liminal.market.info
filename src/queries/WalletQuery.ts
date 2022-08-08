@@ -13,7 +13,7 @@ export default class WalletQuery {
       filledAt
       side
     }
-    positions(orderBy:qty, orderDirection: desc) {
+    positions(orderBy:tsl, orderDirection: desc) {
       symbol {
         id 
         logo
@@ -21,8 +21,8 @@ export default class WalletQuery {
         pricePerShareWei
         priceLastUpdated
       }
-      qty
-      aUSDAmount
+      tsl
+      cost
     }
   }
 

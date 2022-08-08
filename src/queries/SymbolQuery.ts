@@ -7,14 +7,14 @@ export default class SymbolQuery extends BaseQuery {
     public static loadMostPopular(queryBuilder : QueryBuilder) {
 
         let query = new Query('symbols',
-            `symbols (first:10, orderBy: tvl, orderDirection:desc) {
+            `symbols (first:10, orderBy: tsl, orderDirection:desc) {
                                 id
                                 logo
                                 pricePerShare
                                 pricePerShareWei
                                 priceLastUpdated
-                                tvl
-                                tvlUsd
+                                tsl
+                                cost
                             }`);
 
         queryBuilder.add(query);
@@ -28,10 +28,10 @@ export default class SymbolQuery extends BaseQuery {
             pricePerShare
             pricePerShareWei
             priceLastUpdated
-            tvl
-            tvlWei
-            tvlUsd
-            tvlUsdWei
+            tsl
+            tslWei
+            cost
+            costWei
             contract
             wallets {
               id
@@ -42,16 +42,16 @@ export default class SymbolQuery extends BaseQuery {
 
     public static loadBySymbols(queryBuilder : QueryBuilder, first = 20, skip = 0) {
         let query = new Query('symbols',
-            `symbols(first:` + first + `, skip:` + skip + `, orderBy:"tvl", orderDirection:"desc") {
+            `symbols(first:` + first + `, skip:` + skip + `, orderBy:"tsl", orderDirection:"desc") {
             id
             logo
             pricePerShare
             pricePerShareWei
             priceLastUpdated
-            tvl
-            tvlWei
-            tvlUsd
-            tvlUsdWei
+            tsl
+            tslWei
+            cost
+            costWei
             contract
         }`);
         queryBuilder.add(query);
