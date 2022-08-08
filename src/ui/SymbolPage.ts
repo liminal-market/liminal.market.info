@@ -10,27 +10,27 @@ import OrdersHtml from '../html/symbol/orders.html';
 import ChartHtml from '../html/symbol/chart.html';
 import PositionsHtml from '../html/symbol/positions.html';
 import PositionQuery from "../queries/PositionQuery";
+import LinkHandler from "./LinkHandler";
 
 export default class SymbolPage {
     first = 10;
     skip = 0;
     page = 0;
-
+    queryBuilder = new QueryBuilder();
     public async render(symbol? : string) {
 
         Chart.register(...registerables);
         UIHelper.registerHandlebarHelpers();
 
-        let queryBuilder = new QueryBuilder();
         if (symbol) {
-            SymbolQuery.loadBySymbolId(symbol, queryBuilder);
-            OrderQuery.loadNewestOrdersBySymbol(queryBuilder, symbol);
-            PositionQuery.loadLargestPositionsBySymbol(queryBuilder, symbol);
+            SymbolQuery.loadBySymbolId(symbol, this.queryBuilder);
+            OrderQuery.loadNewestOrdersBySymbol(this.queryBuilder, symbol);
+            PositionQuery.loadLargestPositionsBySymbol(this.queryBuilder, symbol);
         } else {
-            SymbolQuery.loadBySymbols(queryBuilder, this.first, this.skip);
+            SymbolQuery.loadBySymbols(this.queryBuilder, this.first, this.skip);
         }
         let openGraphRepository = new OpenGraphRepository();
-        let result = await openGraphRepository.execute(queryBuilder.getQuery())
+        let result = await openGraphRepository.execute(this.queryBuilder.getQuery())
 
         UIHelper.clearContent();
         if (symbol) {
@@ -70,7 +70,7 @@ export default class SymbolPage {
     }
     private renderSymbol(result: any) {
         let template = Handlebars.compile(InfoHtml);
-        let content = template({symbol: result.symbol});
+        let content = template({symbol: result.symbol, GraphQL:this.queryBuilder.getQueryByName('symbol')});
 
         UIHelper.addToTopContent(content);
 
@@ -81,11 +81,11 @@ export default class SymbolPage {
         this.renderWidget(result.symbol.id);
 
         template = Handlebars.compile(PositionsHtml);
-        content = template({Title: 'Largest holders', positions: result.positions});
+        content = template({Title: 'Largest holders', GraphQL:this.queryBuilder.getQueryByName('positions'), positions: result.positions});
         UIHelper.appendToMiddleGrid(content);
 
         template = Handlebars.compile(OrdersHtml);
-        content = template({Title: 'Latest orders', orders: result.orders});
+        content = template({Title: 'Latest orders', GraphQL:this.queryBuilder.getQueryByName('orders'), orders: result.orders});
         UIHelper.appendToMiddleGrid(content);
     }
 
@@ -97,6 +97,7 @@ export default class SymbolPage {
 
         UIHelper.addToTopContent(content);
         this.checkPagingButtons();
+
 
         let buttons = document.querySelectorAll('.stocks_table .paging');
         for (let i=0;i<buttons.length;i++) {
@@ -120,6 +121,9 @@ export default class SymbolPage {
                 UIHelper.clearContent();
 
                 this.renderSymbols(result.symbols);
+
+                let linkHandler = new LinkHandler();
+                linkHandler.bind();
 
                 this.checkPagingButtons();
             })

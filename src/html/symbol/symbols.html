@@ -1,17 +1,21 @@
 <article>
     <h2>Symbols</h2>
+    {{{formatGQL GraphQL}}}
+    <figure>
     <table class="stocks_table">
         <tr>
             <th></th>
             <th>Name</th>
             <th>Shares</th>
-            <th>USD</th>
+            <th>Price per share</th>
+            <th>TVL</th>
         </tr>
         {{#each symbols}}
         <tr>
             <td><img src="{{logo}}" alt="{{id}} logo" /></td>
             <td><a href="" class="symbol">{{id}}</a></td>
             <td>{{number tsl}}</td>
+            <td>{{currency pricePerShare}}</td>
             <td>{{calcValue this}}</td>
         </tr>
         {{/each}}
@@ -24,4 +28,5 @@
         </tr>
         </tfoot>
     </table>
+    </figure>
 </article>

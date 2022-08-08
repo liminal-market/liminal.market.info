@@ -37,7 +37,9 @@ article {
     margin: 1rem 0rem;
     padding: 1rem 1rem;
 }
-
+#main {
+    padding-top: 0;
+}
 #graphInfo {
     background-image: url('../img/The-Graph-Logo.png');
     background-repeat: no-repeat;
@@ -69,4 +71,35 @@ article {
 
 .symbolInfo {
     grid-template-columns: 1fr 2fr;
+}
+
+.green {
+    color:green;
+}
+.red {
+    color:red;
+}
+#main > div > article {
+    position: relative;
+}
+#modal > article > p {
+    position: relative;
+}
+#modal > article > header {
+    padding-bottom: 7px;
+    padding-top: 25px;
+    margin-bottom: 9px;
+}
+.graphQL {
+    position: absolute;
+    right: 13px;
+    top: 11px;
+}
+#copyGraphQL {
+    position: absolute;
+    top:70px;
+    right:30px;
+}
+.chart {
+    background-color: #fff;
 }

@@ -25,6 +25,7 @@
     </article>
     <!--<a href="" id="backBtn">Back</a>-->
     <input type="search" id="search" placeholder="Search address, contract or symbol"/>
+    <!--
     <article id="breadcrumb">
         <nav>
             <ul>
@@ -34,8 +35,9 @@
             </ul>
         </nav>
     </article>
+    -->
     <div class="grid" id="topGrid">
-
+        <article id="loading">Loading...</article>
     </div>
     <div id="middleGrid"></div>
     <article id="graphInfo">
@@ -59,6 +61,26 @@
         <br/>
         You can find us at <a href="https://liminal.market">liminal.market</a>
     </article>
+    <dialog id="modal">
+
+        <article>
+            <header><a href="#close"
+               aria-label="Close"
+               class="close"
+               data-target="modal"
+               onClick="document.getElementById('modal').removeAttribute('open')">
+            </a>
+                GraphQL
+            </header>
+            <p>
+            <a href="" id="copyGraphQL" data-tooltip="Copy GraphQL"><img src="./img/copy.png" /></a>
+
+            Copy the GraphQL code in the textarea, and visit <a href="https://thegraph.com/hosted-service/subgraph/liminal-market/liminal-market" target="_blank">TheGraph Playground</a>
+            to query the data.<br />
+            <pre rows="6" cols="30" id="graphQLArea"></pre>
+            </p>
+        </article>
+    </dialog>
 </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
         integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="

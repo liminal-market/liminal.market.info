@@ -27,7 +27,7 @@ export default class OrderQuery {
         queryBuilder.add(query);
     }
     public static loadNewestOrdersBySymbol(queryBuilder: QueryBuilder, symbol : string) {
-        let str = `orders(where :{ symbol:"` + symbol + `"} first: 20, orderBy: filledAt, orderDirection: desc) {` + this.properies + `}`;
+        let str = `orders(where :{ symbol:"` + symbol.toUpperCase() + `"} first: 20, orderBy: filledAt, orderDirection: desc) {` + this.properies + `}`;
 
         let query = new Query('orders', str);
         queryBuilder.add(query);

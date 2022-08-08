@@ -8,17 +8,16 @@ import  OrderHtml from '../html/wallet/orders.html'
 import UIHelper from "./UIHelper";
 
 export default class Wallet {
-
+    queryBuilder = new QueryBuilder();
     public async render(address: string) {
 
         Chart.register(...registerables);
         UIHelper.registerHandlebarHelpers();
 
-        let queryBuilder = new QueryBuilder();
-        OrderQuery.loadOrdersOnWallet(address, queryBuilder);
+        OrderQuery.loadOrdersOnWallet(address, this.queryBuilder);
 
         let openGraphRepository = new OpenGraphRepository();
-        let result = await openGraphRepository.execute(queryBuilder.getQuery())
+        let result = await openGraphRepository.execute(this.queryBuilder.getQuery())
         let wallet = result.wallet;
 
         UIHelper.clearContent();
@@ -29,16 +28,16 @@ export default class Wallet {
 
     private renderInfo(wallet: any) {
         const template = Handlebars.compile(InfoHtml);
-        let content = template({wallet: wallet});
+        let content = template({wallet: wallet, GraphQL:this.queryBuilder.getQueryByName('wallet')});
 
         UIHelper.addToTopContent(content);
     }
 
     private renderPositions(positions: any) {
         const template = Handlebars.compile(PositionHtml);
-        let content = template({positions: positions});
+        let content = template({positions: positions, GraphQL:this.queryBuilder.getQueryByName('wallet')});
 
-        UIHelper.addToTopContent(content);
+        UIHelper.appendToMiddleGrid(content);
     }
 
     private renderOrders(orders: any) {
@@ -54,7 +53,7 @@ export default class Wallet {
         })
 
         const template = Handlebars.compile(OrderHtml);
-        let content = template({Title:'Orders', orders: orders});
+        let content = template({Title:'Orders', orders: orders, GraphQL:this.queryBuilder.getQueryByName('wallet')});
 
         UIHelper.appendToMiddleGrid(content);
     }

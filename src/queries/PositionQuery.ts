@@ -21,7 +21,7 @@ export default class PositionQuery {
     public static loadLargestPositionsBySymbol(queryBuilder: QueryBuilder, symbol : string) {
         let str = `positions (first:20, orderBy: tsl, orderDirection: desc
 where :{
-  symbol:"` + symbol + `" 
+  symbol:"` + symbol.toUpperCase() + `" 
 }
 ) {` + this.properies + `}`;
 

@@ -27,7 +27,7 @@ export default class WalletQuery {
   }
 
 `
-        let queue = new Query('wallet', str);
+        let queue = new Query('wallets', str);
         queryBuilder.add(queue);
     }
 

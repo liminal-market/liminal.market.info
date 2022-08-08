@@ -7,7 +7,7 @@ export default class LinkHandler {
     public bind() {
 
         let walletLinks = document.querySelectorAll('a.wallet');
-        for (let i=0;i<walletLinks.length;i++) {
+        for (let i = 0; i < walletLinks.length; i++) {
             walletLinks[i].addEventListener('click', async (evt) => {
                 evt.preventDefault();
 
@@ -26,13 +26,14 @@ export default class LinkHandler {
                 let linkHandler = new LinkHandler();
                 linkHandler.bind();
             })
-            let address = (walletLinks[i] as HTMLElement).dataset['address']!.toString();;
+            let address = (walletLinks[i] as HTMLElement).dataset['address']!.toString();
+            ;
             walletLinks[i].parentElement!.insertAdjacentHTML("beforeend", '&nbsp;<a href="" data-copy="' + address + '" class="copy">[c]</a>');
 
         }
 
         let symbolLink = document.querySelectorAll('a.symbol');
-        for (let i=0;i<symbolLink.length;i++) {
+        for (let i = 0; i < symbolLink.length; i++) {
             symbolLink[i].addEventListener('click', async (evt) => {
                 evt.preventDefault();
 
@@ -50,7 +51,42 @@ export default class LinkHandler {
                 linkHandler.bind();
             })
         }
+        let graphQLs = document.querySelectorAll('.graphQL');
+        for (let i = 0; i < graphQLs.length; i++) {
+            graphQLs[i].addEventListener('click', async (evt) => {
+                evt.preventDefault();
 
+                let modal = document.getElementById('modal') as HTMLElement;
+                if (!modal) return;
+
+                modal.addEventListener('click', (evt) => {
+
+                    if ((evt.target as HTMLElement).id == 'modal') {
+                        evt.preventDefault();
+                        evt.stopPropagation();
+
+                        modal.removeAttribute('open');
+                    }
+                })
+
+                let pre = document.getElementById('graphQLArea') as HTMLTextAreaElement;
+                if (!pre) return;
+                let graphQL = (evt.target as HTMLElement).dataset['graphql']!;
+                pre.innerText = graphQL;
+                let copyLink = document.getElementById('copyGraphQL')!;
+                copyLink!.addEventListener('click', (evt) => {
+                    evt.preventDefault();
+
+                    let copyHelper = new CopyHelper();
+                    copyHelper.copyTextToClipboard(graphQL);
+                    copyLink.dataset['tooltip'] = 'Copied!';
+                    setTimeout(() => {
+                        copyLink.dataset['tooltip'] = 'Copy GraphQL';
+                    }, 2000)
+                })
+                modal.setAttribute('open', '');
+            });
+        }
         let allSymbols = document.getElementById('allSymbols');
         if (allSymbols) {
             allSymbols.addEventListener('click', async (evt) => {
@@ -80,7 +116,7 @@ export default class LinkHandler {
         })
     }
 
-    public async copyFunction(element : HTMLElement) {
+    public async copyFunction(element: HTMLElement) {
         let str = element.dataset['copy']!.toString();
         let copyHelper = new CopyHelper();
         if (!await copyHelper.copyTextToClipboard(str)) {

@@ -1,18 +1,25 @@
 <article>
     <h2>Top positions</h2>
+    {{{formatGQL GraphQL}}}
+    <figure>
     <table class="stocks_table">
         <tr>
             <th colspan="2">#</th>
             <th>Shares</th>
-            <th>USD</th>
+            <th>%</th>
+            <th>Cost</th>
+            <th>Value</th>
         </tr>
         {{#each positions}}
         <tr>
             <td><img src="{{symbol.logo}}" alt="{{symbol.id}} logo" /></td>
             <td><a href="" class="symbol">{{symbol.id}}</a></td>
             <td>{{number tsl}}</td>
+            <td>{{{calcPerc this}}}</td>
+            <td>{{calcCost this}}</td>
             <td>{{calcValue this}}</td>
         </tr>
         {{/each}}
     </table>
+    </figure>
 </article>

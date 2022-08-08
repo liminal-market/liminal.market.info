@@ -19,26 +19,29 @@ import 'chartjs-adapter-moment';
 import moment from "moment";
 
 export default class Frontpage {
-
+    queryBuilder = new QueryBuilder();
 
     public async render() {
         Chart.register(...registerables);
         UIHelper.registerHandlebarHelpers();
 
-        let queryBuilder = new QueryBuilder();
-        LiminalMarketInfo.loadLiminalMarketInfo(queryBuilder, (result) => {
+    
+        LiminalMarketInfo.loadLiminalMarketInfo(this.queryBuilder, (result) => {
             this.renderLiminalInfo(result, result);
         });
-        DayDataQuery.loadLast365DataDaysNewestFirst(queryBuilder, (result) => {
+        DayDataQuery.loadLast365DataDaysNewestFirst(this.queryBuilder, (result) => {
 
 
         })
-        SymbolQuery.loadMostPopular(queryBuilder);
-        WalletQuery.loadWalletPositionsNewestFirst(queryBuilder);
-        OrderQuery.loadNewestOrders(queryBuilder);
+        SymbolQuery.loadMostPopular(this.queryBuilder);
+        WalletQuery.loadWalletPositionsNewestFirst(this.queryBuilder);
+        OrderQuery.loadNewestOrders(this.queryBuilder);
 
         let openGraphRepository = new OpenGraphRepository();
-        let result = await openGraphRepository.execute(queryBuilder.getQuery())
+        let result = await openGraphRepository.execute(this.queryBuilder.getQuery())
+
+        let loading = document.getElementById('loading');
+        if (loading) loading.remove();
 
         let chart1 = this.renderLiminalInfo(result.liminalMarketInfos[0], result.dayDatas)
         let chart2 = this.renderVolume(result.dayDatas);
@@ -55,7 +58,7 @@ export default class Frontpage {
 
     public renderVolume(dayDatas: any): [string, string, boolean] {
         const template = Handlebars.compile(VolumeHtml);
-        let content = template({Volume: dayDatas[0].cost});
+        let content = template({Volume: dayDatas[0].cost, GraphQL:this.queryBuilder.getQueryByName('dayDatas')});
 
         UIHelper.addToTopContent(content);
 
@@ -66,10 +69,10 @@ export default class Frontpage {
         let mainDiv = document.getElementById('main');
         if (!mainDiv) return ['', '', false];
 
-        liminalMarketInfo.TVL = parseFloat(liminalMarketInfo.cash) + parseFloat(liminalMarketInfo.value);
+        let TVL = parseFloat(liminalMarketInfo.cash) + parseFloat(liminalMarketInfo.value);
 
         const template = Handlebars.compile(TvlHtml);
-        let content = template(liminalMarketInfo);
+        let content = template({TVL:TVL, GraphQL:this.queryBuilder.getQueryByName('liminalMarketInfos')});
 
         UIHelper.addToTopContent(content);
         return [dayData, 'tvlCanvas', true];
@@ -96,10 +99,10 @@ export default class Frontpage {
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'top',
+                        display: false
                     },
                     title: {
-                        display: true,
+                        display: false,
                         text: ''
                     }
                 },
@@ -118,38 +121,6 @@ export default class Frontpage {
                     data: data,
                 }]
             },
-
-/*
-            options: {
-                plugins: {
-                    legend : {
-                        display:false
-                    }
-                },
-
-                scales: {
-                    x: {
-                        type: 'time',
-                        grid : {
-
-                        },
-                        time: {
-                            unit: 'month',
-                            displayFormats: {
-                                month: 'MMM'
-                            },
-                            minUnit: 'day',
-                            round: 'day',
-
-                        },
-
-                    },
-                    y : {
-                        min: 1
-                    }
-                }
-            },*/
-
         });
 
         return myChart;
@@ -158,7 +129,7 @@ export default class Frontpage {
 
     private renderSymbols(symbols: any) {
         const template = Handlebars.compile(SymbolsHtml);
-        let content = template({Title: 'Top stocks', symbols: symbols});
+        let content = template({Title: 'Top stocks', GraphQL:this.queryBuilder.getQueryByName('symbols'), symbols: symbols});
 
         UIHelper.appendToMiddleGrid(content);
 
@@ -216,7 +187,7 @@ export default class Frontpage {
         })
 
         const template = Handlebars.compile(WalletHtml);
-        let content = template({Title: 'Top wallets', wallets: wallets});
+        let content = template({Title: 'Top wallets', GraphQL:this.queryBuilder.getQueryByName('wallets'), wallets: wallets});
 
         UIHelper.appendToMiddleGrid(content);
     }
@@ -236,7 +207,7 @@ export default class Frontpage {
         UIHelper.registerHandlebarHelpers();
 
         const template = Handlebars.compile(OrderHtml);
-        let content = template({Title: 'Latest orders', orders: orders});
+        let content = template({Title: 'Latest orders', GraphQL:this.queryBuilder.getQueryByName('orders'), orders: orders});
 
         UIHelper.appendToMiddleGrid(content);
     }
