@@ -70,7 +70,7 @@ export default class UIHelper {
 
             let value = parseFloat(obj.tsl) * pricePerShare;
             let cost = parseFloat(obj.cost);
-            let perc = ((cost / value) - 1);
+            let perc = ((value / cost) - 1);
             let className = (perc >= 0) ? 'green' : 'red';
             return '<span class="' + className + '">' + this.formatPerc(perc) + '</span>'
 

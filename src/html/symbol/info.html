@@ -9,7 +9,7 @@
             <ul>
                 <li>Price per share:${{symbol.pricePerShare}} (updated: {{formatDate symbol.priceLastUpdated}})</li>
                 <li>Total shares locked: {{number symbol.tsl}}</li>
-                <li>Cost from user: {{currency symbol.cost}}</li>
+                <li>Cost from users: {{currency symbol.cost}}</li>
                 <li>Current value: {{currency symbol.value}}</li>
                 <li>Total orders: {{number symbol.txCount}}</li>
                 <li>Contract address: <a href="https://mumbai.polygonscan.com/address/{{symbol.contract}}" target="_blank" class="wallet" data-address="{{symbol.contract}}">{{address symbol.contract}}</a></li>
