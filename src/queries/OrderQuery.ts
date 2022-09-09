@@ -34,7 +34,7 @@ export default class OrderQuery {
     }
     public static loadOrdersOnWallet(address : string, queryBuilder : QueryBuilder) {
         let str = `
-            wallet(id:"` + address + `")
+            wallet(id:"` + address.toLowerCase() + `")
             {
                 id
                 cash
