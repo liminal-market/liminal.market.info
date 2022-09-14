@@ -5,10 +5,23 @@ import LinkHandler from "./ui/LinkHandler";
 import SymbolPage from "./ui/SymbolPage";
 import SymbolQuery from "./queries/SymbolQuery";
 import SymbolLogic from "./queries/SymbolLogic";
+import NetworkInfo from "./NetworkInfo";
 
 export default class main {
 
     public static async start() {
+        NetworkInfo.load();
+        let chainSelector = document.getElementById('chainSelector');
+        if (chainSelector) {
+            chainSelector.addEventListener('change', async (evt) => {
+                let input = evt.target as HTMLSelectElement;
+                NetworkInfo.load(input.value);
+
+                let frontpage = new Frontpage();
+                await frontpage.render();
+            })
+        }
+
         let frontpage = new Frontpage();
         await frontpage.render();
 

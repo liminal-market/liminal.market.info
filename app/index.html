@@ -30,10 +30,19 @@
             |
             <a href="https://app.liminal.market">Trade</a>
         </div>
-    </div>
-</header>
-<main class="container" id="main">
 
+    </div>
+
+</header>
+
+<main class="container" id="main">
+    <div>
+        <label>Select chain</label>
+        <select id="chainSelector">
+            <option value="mumbai" style="background-image:url(img/polygon.webp);padding-left: 2rem;">Mumbai (Polygon Testnet)</option>
+            <option value="fuji" style="background-image:url(img/avalanche.svg);">Fuji (Avalanche Testnet)</option>
+        </select>
+    </div>
 
     <!--<a href="" id="backBtn">Back</a>-->
     <input type="search" id="search" placeholder="Search address, contract or symbol"/>
@@ -75,7 +84,7 @@
         Liminal.market uses <a href="https://thegraph.com/" target="_blank">TheGraph</a> to index the blockchain.
         You can do you own queries using GraphQL.
         There are predefined templates for you to play with. <a
-            href="https://thegraph.com/hosted-service/subgraph/liminal-market/liminal-market" target="_blank">Check it
+            class="subgraph_url" target="_blank">Check it
         out.</a>
     </article>
     <article id="gsheetInfo">
@@ -100,7 +109,7 @@
                 <a href="" id="copyGraphQL" data-tooltip="Copy GraphQL"><img src="./img/copy.png"/></a>
 
                 Copy the GraphQL code in the textarea, and visit <a
-                    href="https://thegraph.com/hosted-service/subgraph/liminal-market/liminal-market" target="_blank">TheGraph
+                    class="subgraph_url" target="_blank">TheGraph
                 Playground</a>
                 to query the data.<br/>
             <pre rows="6" cols="30" id="graphQLArea"></pre>
@@ -114,7 +123,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.2/chart.min.js"
         integrity="sha512-zjlf0U0eJmSo1Le4/zcZI51ks5SjuQXkU0yOdsOBubjSmio9iCUp8XPLkEAADZNBdR9crRy3cniZ65LF2w8sRA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="module" src="./js/bundle.js?d=8"></script>
+<script type="module" src="./js/bundle.js?d=9"></script>
 
 </body>
 </html>
