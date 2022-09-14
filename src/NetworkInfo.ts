@@ -23,9 +23,9 @@ export default class NetworkInfo {
 
     public static getSubgraphUrl() {
         if (NetworkInfo.Network == NetworkInfo.Mumbai) {
-            return 'https://thegraph.com/hosted-service/subgraph/liminal-market/liminal-market-mumbai';
+            return 'https://api.thegraph.com/subgraphs/name/liminal-market/liminal-market-mumbai';
         } else {
-            return 'https://thegraph.com/hosted-service/subgraph/liminal-market/liminal-market-fuji';
+            return 'https://api.thegraph.com/subgraphs/name/liminal-market/liminal-market-fuji';
         }
     }
 }
