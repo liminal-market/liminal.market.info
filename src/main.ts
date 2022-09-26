@@ -6,6 +6,7 @@ import SymbolPage from "./ui/SymbolPage";
 import SymbolQuery from "./queries/SymbolQuery";
 import SymbolLogic from "./queries/SymbolLogic";
 import NetworkInfo from "./NetworkInfo";
+import UIHelper from "./ui/UIHelper";
 
 export default class main {
 
@@ -16,6 +17,7 @@ export default class main {
             chainSelector.addEventListener('change', async (evt) => {
                 let input = evt.target as HTMLSelectElement;
                 NetworkInfo.load(input.value);
+                UIHelper.clearContent();
 
                 let frontpage = new Frontpage();
                 await frontpage.render();

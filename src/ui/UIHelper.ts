@@ -4,6 +4,7 @@ import EmailFormHtml from "../html/emailform.html";
 export default class UIHelper {
     static middleCount = 0;
 
+
     public static addToTopContent(content: string) {
         let topGrid = document.getElementById('topGrid')!;
         topGrid.innerHTML += content;
