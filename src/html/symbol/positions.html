@@ -6,16 +6,12 @@
         <tr>
             <th>Wallet</th>
             <th>Shares</th>
-            <th>%</th>
-            <th>Cost</th>
             <th>Value</th>
         </tr>
         {{#each positions}}
         <tr>
             <td><a href="" class="wallet" data-address="{{wallet.id}}">{{address wallet.id}}</a></td>
             <td>{{number tsl}}</td>
-            <td>{{{calcPerc this}}}</td>
-            <td>{{calcCost this}}</td>
             <td>{{calcValue this}}</td>
         </tr>
         {{/each}}

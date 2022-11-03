@@ -14,7 +14,7 @@ export default class SymbolQuery extends BaseQuery {
                                 pricePerShareWei
                                 priceLastUpdated
                                 tsl
-                                cost
+                                value
                             }`);
 
         queryBuilder.add(query);
@@ -30,8 +30,6 @@ export default class SymbolQuery extends BaseQuery {
             priceLastUpdated
             tsl
             tslWei
-            cost
-            costWei
             contract
             txCount
             value
@@ -52,8 +50,6 @@ export default class SymbolQuery extends BaseQuery {
             priceLastUpdated
             tsl
             tslWei
-            cost
-            costWei
             txCount
             value
             contract

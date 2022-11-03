@@ -1,5 +1,5 @@
 import LiminalMarketInfo from "../queries/LiminalMarketInfo";
-import DayDataQuery from "../queries/DayDataQuery";
+import DailyDataQuery from "../queries/DailyDataQuery";
 import OpenGraphRepository from "../repositories/OpenGraphRepository";
 import QueryBuilder from "../queries/QueryBuilder";
 import TvlHtml from '../html/frontpage/tvl.html'
@@ -29,7 +29,7 @@ export default class Frontpage {
         LiminalMarketInfo.loadLiminalMarketInfo(this.queryBuilder, (result) => {
             this.renderLiminalInfo(result, result);
         });
-        DayDataQuery.loadLast365DataDaysNewestFirst(this.queryBuilder, (result) => {
+        DailyDataQuery.loadLast365DataDaysNewestFirst(this.queryBuilder, (result) => {
 
 
         })
@@ -43,8 +43,8 @@ export default class Frontpage {
         let loading = document.getElementById('loading');
         if (loading) loading.remove();
 
-        let chart1 = this.renderLiminalInfo(result.liminalMarketInfos[0], result.dayDatas)
-        let chart2 = this.renderVolume(result.dayDatas);
+        let chart1 = this.renderLiminalInfo(result.liminalMarketInfos[0], result.dailyDatas)
+        let chart2 = this.renderVolume(result.dailyDatas);
         this.renderSymbols(result.symbols);
         this.renderWallets(result.wallets);
         this.renderOrders(result.orders);
@@ -56,26 +56,26 @@ export default class Frontpage {
         return new Date(date.getTime() + (days * 24 * 60 * 60 * 1000));
     }
 
-    public renderVolume(dayDatas: any): [string, string, boolean] {
+    public renderVolume(dailyDatas: any): [string, string, boolean] {
         const template = Handlebars.compile(VolumeHtml);
-        let content = template({Volume: dayDatas[0].cost, GraphQL:this.queryBuilder.getQueryByName('dayDatas')});
+        let content = template({Volume: dailyDatas[0].value, GraphQL:this.queryBuilder.getQueryByName('dailyDatas')});
 
         UIHelper.addToTopContent(content);
 
-        return [dayDatas, 'volumeCanvas', false];
+        return [dailyDatas, 'volumeCanvas', false];
     }
 
-    public renderLiminalInfo(liminalMarketInfo: any, dayData: any): [string, string, boolean] {
+    public renderLiminalInfo(liminalMarketInfo: any, dailyData: any): [string, string, boolean] {
         let mainDiv = document.getElementById('main');
         if (!mainDiv) return ['', '', false];
 
-        let TVL = parseFloat(liminalMarketInfo.cash) + parseFloat(liminalMarketInfo.value);
+        let TVL = parseFloat(liminalMarketInfo.balance) + parseFloat(liminalMarketInfo.value);
 
         const template = Handlebars.compile(TvlHtml);
         let content = template({TVL:TVL, GraphQL:this.queryBuilder.getQueryByName('liminalMarketInfos')});
 
         UIHelper.addToTopContent(content);
-        return [dayData, 'tvlCanvas', true];
+        return [dailyData, 'tvlCanvas', true];
 
     }
 

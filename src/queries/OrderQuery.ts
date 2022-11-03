@@ -7,7 +7,6 @@ export default class OrderQuery {
         wallet {
             id
         },
-        recipient
         symbol {
             id
             logo
@@ -37,7 +36,7 @@ export default class OrderQuery {
             wallet(id:"` + address.toLowerCase() + `")
             {
                 id
-                cash
+                balance
                 orders(first: 10, orderBy: filledAt, orderDirection: desc) {
                 id
                 side
@@ -61,7 +60,6 @@ export default class OrderQuery {
                     tsl
                 }
                 tsl
-                cost
             }
             }
         `;

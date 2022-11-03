@@ -10,7 +10,6 @@ export default class PositionQuery {
     pricePerShare
   }
   tsl
-  cost
   txCount
   updated
   wallet {

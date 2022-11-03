@@ -7,6 +7,7 @@ import SymbolQuery from "./queries/SymbolQuery";
 import SymbolLogic from "./queries/SymbolLogic";
 import NetworkInfo from "./NetworkInfo";
 import UIHelper from "./ui/UIHelper";
+import Routing from "./Routing";
 
 export default class main {
 
@@ -24,14 +25,8 @@ export default class main {
             })
         }
 
-        let frontpage = new Frontpage();
-        await frontpage.render();
-
-        let wallet = new Wallet();
-        //wallet.render('0x93da645082493bbd7116fc057c5b9adfd5363912')
-
-        let symbolPage = new SymbolPage();
-        //await symbolPage.render('AAPL')
+        let routing = new Routing();
+        await routing.loadRoutes();
 
         let search = new Search();
         search.listen()

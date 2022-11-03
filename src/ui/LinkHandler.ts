@@ -22,6 +22,7 @@ export default class LinkHandler {
                 await wallet.render(address);
                 window.scrollTo(0, 0);
 
+                history.pushState(null, '', '#/' + address);
 
                 let linkHandler = new LinkHandler();
                 linkHandler.bind();
@@ -46,6 +47,8 @@ export default class LinkHandler {
                 let symbolPage = new SymbolPage();
                 await symbolPage.render(element.innerText);
                 window.scrollTo(0, 0);
+
+                history.pushState(null, '', '#/' + element.innerText);
 
                 let linkHandler = new LinkHandler();
                 linkHandler.bind();
