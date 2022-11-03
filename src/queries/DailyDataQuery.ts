@@ -12,6 +12,7 @@ export default class DailyDataQuery {
                 date
                 value
                 shares
+                aUsdVolume
                 txCount
                 walletCount
                 symbolCount

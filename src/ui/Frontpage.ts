@@ -85,8 +85,9 @@ export default class Frontpage {
         let idx = 0;
         for (let i = dayData.length-1; i >= 0; i--) {
             let day = dayData[i];
-            let dateStr = moment(new Date(parseFloat(day.date))).format('YYYY-MM-DD'); ;
-            let y = parseFloat(day.cost);
+            let dateStr = moment(new Date(parseFloat(day.date))).format('YYYY-MM-DD');
+            console.log(day.aUsdVolume);
+            let y = parseFloat(day.aUsdVolume);
             if (!isTvl) y = parseFloat(day.shares);
 
             data[idx++] = {x: dateStr, y: y}
