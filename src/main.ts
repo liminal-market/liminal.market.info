@@ -13,17 +13,6 @@ export default class main {
 
     public static async start() {
         NetworkInfo.load();
-        let chainSelector = document.getElementById('chainSelector');
-        if (chainSelector) {
-            chainSelector.addEventListener('change', async (evt) => {
-                let input = evt.target as HTMLSelectElement;
-                NetworkInfo.load(input.value);
-                UIHelper.clearContent();
-
-                let frontpage = new Frontpage();
-                await frontpage.render();
-            })
-        }
 
         let routing = new Routing();
         await routing.loadRoutes();
