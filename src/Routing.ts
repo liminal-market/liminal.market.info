@@ -15,7 +15,6 @@ export default class Routing {
     public async loadRoutes() {
         let key = 'frontpage';
         let path = window.location.hash.replace('#', '').replace('/', '');
-        if (window.location.search !== '') path = window.location.search.replace('?', '');
 
         if (path !== '' && path.length < 8) {
             key = 'symbol'
