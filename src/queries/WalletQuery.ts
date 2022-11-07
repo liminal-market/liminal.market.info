@@ -43,7 +43,7 @@ export default class WalletQuery {
                 }
                 balance
                 diff
-                action
+                actionName
                 created
                 createdISO
             }
