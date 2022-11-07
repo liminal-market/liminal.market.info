@@ -60,6 +60,7 @@ export default class OrderQuery {
                     tsl
                 }
                 tsl
+                tslWei
             }
             }
         `;

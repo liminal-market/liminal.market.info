@@ -22,6 +22,7 @@ export default class WalletQuery {
         priceLastUpdated
       }
       tsl
+      tslWei
     }
   }
 

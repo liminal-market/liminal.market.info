@@ -1,7 +1,7 @@
 <article id="tvl">
     <div>
         <strong>TVL</strong>
-        <h3>{{currency TVL}}</h3>
+        <h3 data-tooltip="Value of aUSD and total stock locked into Liminal.market" data-placement="right">{{currency TVL}}</h3>
         {{{formatGQL GraphQL}}}
     </div>
     <canvas id="tvlCanvas" class="chart" aria-label="Total Value Locked into Liminal.market" role="img"></canvas>
