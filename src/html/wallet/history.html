@@ -1,0 +1,22 @@
+<article>
+    <h2>Wallet history</h2>
+    {{{formatGQL GraphQL}}}
+    <figure>
+        <table class="stocks_table">
+            <tr>
+                <th>Created</th>
+                <th>Action</th>
+                <th>Balance</th>
+                <th>Difference</th>
+            </tr>
+            {{#each history}}
+            <tr>
+                <td>{{createdISO}}</td>
+                <td>{{action}}</td>
+                <td>{{number balance}}</td>
+                <td>{{number diff}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </figure>
+</article>

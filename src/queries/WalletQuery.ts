@@ -3,7 +3,7 @@ import Query from "./Query";
 
 export default class WalletQuery {
 
-    public static loadWalletPositionsNewestFirst(queryBuilder : QueryBuilder) {
+    public static loadWalletPositionsNewestFirst(queryBuilder: QueryBuilder) {
         let str = `
   wallets(first: 10, orderBy: lastOrderAt, orderDirection: desc) {
     id
@@ -28,6 +28,29 @@ export default class WalletQuery {
 `
         let queue = new Query('wallets', str);
         queryBuilder.add(queue);
+    }
+
+    public static loadHistory(address: string, queryBuilder: QueryBuilder) {
+        let str = `
+            walletHistories
+                (where:{wallet:"` + address + `"}
+                orderBy: created
+                orderDirection: desc)
+            {
+                id
+                wallet {
+                    id
+                }
+                balance
+                diff
+                action
+                created
+                createdISO
+            }
+       `;
+        let queue = new Query('walletHistory', str);
+        queryBuilder.add(queue);
+
     }
 
 }

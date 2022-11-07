@@ -4,8 +4,10 @@ import OrderQuery from "../queries/OrderQuery";
 import OpenGraphRepository from "../repositories/OpenGraphRepository";
 import InfoHtml from '../html/wallet/info.html'
 import PositionHtml from '../html/wallet/positions.html'
+import HistoryHtml from '../html/wallet/history.html'
 import  OrderHtml from '../html/wallet/orders.html'
 import UIHelper from "./UIHelper";
+import WalletQuery from "../queries/WalletQuery";
 
 export default class Wallet {
     queryBuilder = new QueryBuilder();
@@ -15,6 +17,7 @@ export default class Wallet {
         UIHelper.registerHandlebarHelpers();
 
         OrderQuery.loadOrdersOnWallet(address, this.queryBuilder);
+        WalletQuery.loadHistory(address, this.queryBuilder)
 
         let openGraphRepository = new OpenGraphRepository();
         let result = await openGraphRepository.execute(this.queryBuilder.getQuery())
@@ -24,6 +27,7 @@ export default class Wallet {
         this.renderInfo(wallet);
         this.renderPositions(wallet.positions)
         this.renderOrders(wallet.orders)
+        this.renderHistory(result.walletHistories)
     }
 
     private renderInfo(wallet: any) {
@@ -39,7 +43,13 @@ export default class Wallet {
 
         UIHelper.appendToMiddleGrid(content);
     }
+    private renderHistory(history: any) {
+        console.log(history);
+        const template = Handlebars.compile(HistoryHtml);
+        let content = template({history: history, GraphQL:this.queryBuilder.getQueryByName('history')});
 
+        UIHelper.appendToMiddleGrid(content);
+    }
     private renderOrders(orders: any) {
         Handlebars.registerHelper('orderDesc', function (order: any) {
             let str = '';
