@@ -56,7 +56,7 @@ export default class Wallet {
     }
     private renderHistory(history: any) {
         const template = Handlebars.compile(HistoryHtml);
-        let content = template({history: history, GraphQL:this.queryBuilder.getQueryByName('history')});
+        let content = template({history: history, GraphQL:this.queryBuilder.getQueryByName('walletHistory')});
 
         UIHelper.appendToMiddleGrid(content);
     }
