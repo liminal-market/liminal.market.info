@@ -8,6 +8,7 @@ import HistoryHtml from '../html/wallet/history.html'
 import  OrderHtml from '../html/wallet/orders.html'
 import UIHelper from "./UIHelper";
 import WalletQuery from "../queries/WalletQuery";
+import {formatNumber} from "chart.js/helpers";
 
 export default class Wallet {
     queryBuilder = new QueryBuilder();
@@ -31,6 +32,16 @@ export default class Wallet {
     }
 
     private renderInfo(wallet: any) {
+        Handlebars.registerHelper('totalValue', function (wallet: any) {
+            let stockValue = 0;
+            let positions = wallet.positions;
+            for (let i=0;i<positions.length;i++) {
+                stockValue += parseFloat(positions[i].symbol.pricePerShare) * parseFloat(positions[i].tsl);
+            }
+
+            return UIHelper.formatCurrency(parseFloat(wallet.balance) + stockValue);
+        })
+
         const template = Handlebars.compile(InfoHtml);
         let content = template({wallet: wallet, GraphQL:this.queryBuilder.getQueryByName('wallet')});
 
@@ -44,7 +55,6 @@ export default class Wallet {
         UIHelper.appendToMiddleGrid(content);
     }
     private renderHistory(history: any) {
-        console.log(history);
         const template = Handlebars.compile(HistoryHtml);
         let content = template({history: history, GraphQL:this.queryBuilder.getQueryByName('history')});
 

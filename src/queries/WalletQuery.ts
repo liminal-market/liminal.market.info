@@ -42,7 +42,9 @@ export default class WalletQuery {
                     id
                 }
                 balance
+                balanceWei
                 diff
+                diffWei
                 actionName
                 created
                 createdISO
