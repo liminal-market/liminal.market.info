@@ -33,7 +33,7 @@ export default class WalletQuery {
     public static loadHistory(address: string, queryBuilder: QueryBuilder) {
         let str = `
             walletHistories
-                (where:{wallet:"` + address + `"}
+                (where:{wallet:"` + address.toLowerCase() + `"}
                 orderBy: created
                 orderDirection: desc)
             {
