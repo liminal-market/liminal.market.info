@@ -24,15 +24,9 @@ export default class Frontpage {
     public async render() {
         Chart.register(...registerables);
         UIHelper.registerHandlebarHelpers();
-
     
-        LiminalMarketInfo.loadLiminalMarketInfo(this.queryBuilder, (result) => {
-            this.renderLiminalInfo(result, result);
-        });
-        DailyDataQuery.loadLast365DataDaysNewestFirst(this.queryBuilder, (result) => {
-
-
-        })
+        LiminalMarketInfo.loadLiminalMarketInfo(this.queryBuilder);
+        DailyDataQuery.loadLast365DataDaysNewestFirst(this.queryBuilder)
         SymbolQuery.loadMostPopular(this.queryBuilder);
         WalletQuery.loadWalletPositionsNewestFirst(this.queryBuilder);
         OrderQuery.loadNewestOrders(this.queryBuilder);
@@ -42,6 +36,10 @@ export default class Frontpage {
 
         let loading = document.getElementById('loading');
         if (loading) loading.remove();
+
+        if (!result) {
+            return;
+        }
 
         let chart1 = this.renderLiminalInfo(result.liminalMarketInfos[0], result.dailyDatas)
         let chart2 = this.renderVolume(result.dailyDatas);

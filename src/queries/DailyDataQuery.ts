@@ -4,7 +4,7 @@ import QueryBuilder from "./QueryBuilder";
 export default class DailyDataQuery {
 
 
-    public static loadLast365DataDaysNewestFirst(queryBuilder:QueryBuilder, action? : (result : any) => void) {
+    public static loadLast365DataDaysNewestFirst(queryBuilder:QueryBuilder) {
 
         let q = `
             dailyDatas(first: 365, orderBy: date, orderDirection: desc) {
@@ -19,8 +19,6 @@ export default class DailyDataQuery {
             }
         `
         let query = new Query('dailyDatas', q);
-        query.action = action;
-
         queryBuilder.add(query);
 
     }

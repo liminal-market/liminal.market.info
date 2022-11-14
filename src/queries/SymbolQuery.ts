@@ -69,7 +69,10 @@ export default class SymbolQuery extends BaseQuery {
         }
     }
     public static async getAllSymbols() {
-        return (await this.loadAllSymbols()).symbols;
+        let result = await this.loadAllSymbols();
+        if (!result) return ;
+
+        return result.symbols;
     }
 
 }

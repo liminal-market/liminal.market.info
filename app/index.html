@@ -37,19 +37,13 @@
 
 <main class="container" id="main">
 
-    <!--<a href="" id="backBtn">Back</a>-->
-    <input type="search" id="search" placeholder="Search address, contract or symbol"/>
-    <!--
-    <article id="breadcrumb">
-        <nav>
-            <ul>
-                <li><a href="/">Frontpage</a></li>
-                <li><a href="/">Stocks</a></li>
-                <li class="no_crumb"><a href="/">AAPL</a></li>
-            </ul>
-        </nav>
-    </article>
-    -->
+    <div class="grid">
+        <input type="search" id="search" placeholder="Search address, contract or symbol"/>
+        <select name="select_chainId" id="select_chainId">
+            <option value="137">Polygon</option>
+            <option value="80001">Mumbai</option>
+        </select>
+    </div>
     <div class="grid" id="topGrid">
         <article id="loading">Loading...</article>
     </div>

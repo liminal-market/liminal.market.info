@@ -1,6 +1,7 @@
 import Frontpage from "./ui/Frontpage";
 import SymbolPage from "./ui/SymbolPage";
 import Wallet from "./ui/Wallet";
+import NetworkInfo from "./network/NetworkInfo";
 
 
 export default class Routing {
@@ -14,7 +15,9 @@ export default class Routing {
 
     public async loadRoutes() {
         let key = 'frontpage';
+
         let path = window.location.hash.replace('#', '').replace('/', '');
+        path = this.parseChainFromPath(path);
 
         if (path !== '' && path.length < 8) {
             key = 'symbol'
@@ -46,4 +49,18 @@ export default class Routing {
     }
 
 
+    private parseChainFromPath(path: string) {
+        if (path.indexOf('chain') == -1) {
+            NetworkInfo.load();
+            return path;
+        }
+
+        path = path.replace('chain/', '');
+        let chainId = path.substring(0, path.indexOf('/'));
+
+        NetworkInfo.load(chainId);
+
+        path = path.replace(chainId + '/', '');
+        return path;
+    }
 }

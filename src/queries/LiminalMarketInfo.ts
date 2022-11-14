@@ -4,7 +4,7 @@ import QueryBuilder from "./QueryBuilder";
 export default class LiminalMarketInfo {
 
 
-    public static loadLiminalMarketInfo(queryBuilder: QueryBuilder, action? : (result : any) => void) {
+    public static loadLiminalMarketInfo(queryBuilder: QueryBuilder) {
         let q = `
             liminalMarketInfos {
                   id
@@ -24,7 +24,6 @@ export default class LiminalMarketInfo {
             }
         `;
         let query = new Query('liminalMarketInfos', q);
-        query.action = action;
         queryBuilder.add(query);
 
 

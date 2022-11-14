@@ -131,3 +131,7 @@ article {
         display: none;
     }
 }
+
+.no_info {
+    grid-template-columns: 1fr 4fr;
+}

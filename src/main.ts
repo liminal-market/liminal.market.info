@@ -1,21 +1,18 @@
-import Frontpage from "./ui/Frontpage";
-import Wallet from "./ui/Wallet";
 import Search from "./ui/Search";
 import LinkHandler from "./ui/LinkHandler";
-import SymbolPage from "./ui/SymbolPage";
-import SymbolQuery from "./queries/SymbolQuery";
 import SymbolLogic from "./queries/SymbolLogic";
-import NetworkInfo from "./NetworkInfo";
-import UIHelper from "./ui/UIHelper";
 import Routing from "./Routing";
+import NetworkInfo from "./network/NetworkInfo";
 
 export default class main {
 
     public static async start() {
-        NetworkInfo.load();
+
 
         let routing = new Routing();
         await routing.loadRoutes();
+
+        NetworkInfo.bindEvent(this);
 
         let search = new Search();
         search.listen()

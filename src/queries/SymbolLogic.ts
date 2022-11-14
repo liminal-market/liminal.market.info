@@ -9,7 +9,8 @@ export default class SymbolLogic {
         SymbolLogic.Symbols = [];
         let symbol : any;
         let symbols = await SymbolQuery.getAllSymbols();
-        for (let i=0;i<symbols.length;i++) {
+
+        for (let i=0;symbols && i<symbols.length;i++) {
             symbol = symbols[i];
             SymbolLogic.Symbols.push(symbol.id);
         }

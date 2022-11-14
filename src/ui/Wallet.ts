@@ -5,10 +5,10 @@ import OpenGraphRepository from "../repositories/OpenGraphRepository";
 import InfoHtml from '../html/wallet/info.html'
 import PositionHtml from '../html/wallet/positions.html'
 import HistoryHtml from '../html/wallet/history.html'
-import  OrderHtml from '../html/wallet/orders.html'
+import OrderHtml from '../html/wallet/orders.html'
 import UIHelper from "./UIHelper";
 import WalletQuery from "../queries/WalletQuery";
-import {formatNumber} from "chart.js/helpers";
+import NoInfoHtml from '../html/wallet/no_info.html';
 
 export default class Wallet {
     queryBuilder = new QueryBuilder();
@@ -22,9 +22,15 @@ export default class Wallet {
 
         let openGraphRepository = new OpenGraphRepository();
         let result = await openGraphRepository.execute(this.queryBuilder.getQuery())
+        if (!result || !result.wallet) {
+            this.renderNoInfo(address);
+            return;
+        }
+
         let wallet = result.wallet;
 
         UIHelper.clearContent();
+
         this.renderInfo(wallet);
         this.renderPositions(wallet.positions)
         this.renderOrders(wallet.orders)
@@ -76,5 +82,11 @@ export default class Wallet {
         let content = template({Title:'Orders', orders: orders, GraphQL:this.queryBuilder.getQueryByName('wallet')});
 
         UIHelper.appendToMiddleGrid(content);
+    }
+
+    private renderNoInfo(address: string) {
+        const template = Handlebars.compile(NoInfoHtml);
+        let content = template({ethAddress: address});
+        UIHelper.addToTopContent(content);
     }
 }
