@@ -53,7 +53,9 @@ export default class UIHelper {
         Handlebars.registerHelper('number', (str: any) => {
             return new Intl.NumberFormat('en-US').format(str);
         })
-
+        Handlebars.registerHelper('perc', (str: any) => {
+            return this.formatPerc(str);
+        })
         Handlebars.registerHelper('calcValue', (obj: any) => {
             let pricePerShare = (obj.pricePerShare) ? parseFloat(obj.pricePerShare) : parseFloat(obj.symbol.pricePerShare);
             return this.formatCurrency(parseFloat(obj.tsl) * pricePerShare)
@@ -83,7 +85,7 @@ export default class UIHelper {
         return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(number);
     }
 
-    private static formatPerc(number: number) {
+    public static formatPerc(number: number) {
         return new Intl.NumberFormat('en-US', {
             style: 'percent',
             minimumFractionDigits: 2,

@@ -7,6 +7,8 @@
             <th colspan="2">#</th>
             <th>Shares</th>
             <th>Value</th>
+            <th>PL</th>
+            <th>PLpc</th>
         </tr>
         {{#each positions}}
         <tr>
@@ -14,6 +16,8 @@
             <td><a href="" class="symbol">{{symbol.id}}</a></td>
             <td title="{{tslWei}}">{{number tsl}}</td>
             <td>{{calcValue this}}</td>
+            <td>{{plCalc this}}</td>
+            <td>{{plpcCalc this}}</td>
         </tr>
         {{/each}}
     </table>

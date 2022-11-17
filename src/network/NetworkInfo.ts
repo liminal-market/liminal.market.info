@@ -34,8 +34,12 @@ export default class NetworkInfo {
 
     public static getNetworks() {
         let networks: Network[] = [];
-        networks.push(new Network('Mumbai', '80001', 'https://api.thegraph.com/subgraphs/name/liminal-market/liminal-market-mumbai'))
-        networks.push(new Network('Polygon', '137', 'https://api.thegraph.com/subgraphs/name/liminal-market/liminal-market-polygon'))
+        networks.push(new Network('Mumbai', '80001',
+            'https://api.thegraph.com/subgraphs/name/liminal-market/liminal-market-mumbai',
+            'https://f8t1vrrwtboa.usemoralis.com:2053/server/functions'))
+        networks.push(new Network('Polygon', '137',
+            'https://api.thegraph.com/subgraphs/name/liminal-market/liminal-market-polygon',
+            'https://rokinwgcthqy.grandmoralis.com:2053/server/functions'))
         return networks;
     }
 

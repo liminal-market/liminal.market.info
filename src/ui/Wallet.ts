@@ -9,9 +9,12 @@ import OrderHtml from '../html/wallet/orders.html'
 import UIHelper from "./UIHelper";
 import WalletQuery from "../queries/WalletQuery";
 import NoInfoHtml from '../html/wallet/no_info.html';
+import PositionRepository from "../repositories/PositionRepository";
 
 export default class Wallet {
     queryBuilder = new QueryBuilder();
+    userPositions : any;
+
     public async render(address: string) {
 
         Chart.register(...registerables);
@@ -27,17 +30,20 @@ export default class Wallet {
             return;
         }
 
+        let positionRepository = new PositionRepository();
+        this.userPositions = await positionRepository.getUserPositions(address);
+
         let wallet = result.wallet;
 
         UIHelper.clearContent();
 
-        this.renderInfo(wallet);
-        this.renderPositions(wallet.positions)
+        this.renderInfo(wallet, this.userPositions);
+        this.renderPositions(wallet.positions, this.userPositions)
         this.renderOrders(wallet.orders)
         this.renderHistory(result.walletHistories)
     }
 
-    private renderInfo(wallet: any) {
+    private renderInfo(wallet: any, userPositions : any) {
         Handlebars.registerHelper('totalValue', function (wallet: any) {
             let stockValue = 0;
             let positions = wallet.positions;
@@ -47,16 +53,36 @@ export default class Wallet {
 
             return UIHelper.formatCurrency(parseFloat(wallet.balance) + stockValue);
         })
-
+console.log('userPositions', userPositions);
         const template = Handlebars.compile(InfoHtml);
-        let content = template({wallet: wallet, GraphQL:this.queryBuilder.getQueryByName('wallet')});
+        let content = template({wallet: wallet, userPositions: userPositions, GraphQL:this.queryBuilder.getQueryByName('wallet')});
 
         UIHelper.addToTopContent(content);
     }
 
-    private renderPositions(positions: any) {
+    private renderPositions(positions: any, userPositions : any) {
+        Handlebars.registerHelper('plCalc', (position: any) => {
+            let positions = this.userPositions.positions;
+            for (let i=0;i<positions.length;i++) {
+                if (positions[i].symbol == position.symbol.id) {
+                    return UIHelper.formatCurrency(positions[i].unrealized_pl)
+                }
+            }
+            return '';
+        })
+        Handlebars.registerHelper('plpcCalc', (position: any) => {
+            let positions = this.userPositions.positions;
+            for (let i=0;i<positions.length;i++) {
+                console.log(positions[i].symbol, position.symbol.id);
+                if (positions[i].symbol == position.symbol.id) {
+                    return UIHelper.formatPerc(positions[i].unrealized_plpc)
+                }
+            }
+            return '';
+        })
+
         const template = Handlebars.compile(PositionHtml);
-        let content = template({positions: positions, GraphQL:this.queryBuilder.getQueryByName('wallet')});
+        let content = template({positions: positions, userPositions:userPositions, GraphQL:this.queryBuilder.getQueryByName('wallet')});
 
         UIHelper.appendToMiddleGrid(content);
     }
