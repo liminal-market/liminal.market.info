@@ -9,15 +9,10 @@ export default class PositionRepository {
 
     public async getUserPositions(address : string) {
         let network = NetworkInfo.Network!;
-        let url = network.ServerUrl + '/positions';
-        let chainId = network.ChainId;
-        let obj : any = {
-            address, chainId
-        }
+        let url = network.ServerUrl + '/positions?address=' + address + '&chainId=' + network.ChainId;
 
         return (await (await fetch(url, {
-            method: 'POST',
-            body : JSON.stringify(obj)
+            method: 'GET'
         })).json()).result;
 
 
