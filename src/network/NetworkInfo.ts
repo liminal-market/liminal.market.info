@@ -29,7 +29,7 @@ export default class NetworkInfo {
                 history.pushState('', '', '/#' + hash)
             }
         })
-        if (!NetworkInfo.Network) this.load('137');
+        if (!NetworkInfo.Network) this.load('80001');
     }
 
     public static getNetworks() {
