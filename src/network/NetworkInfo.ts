@@ -36,10 +36,12 @@ export default class NetworkInfo {
         let networks: Network[] = [];
         networks.push(new Network('Mumbai', '80001',
             'https://api.thegraph.com/subgraphs/name/liminal-market/liminal-market-mumbai',
-            'https://f8t1vrrwtboa.usemoralis.com:2053/server/functions'))
+            'https://thegraph.com/hosted-service/subgraph/liminal-market/liminal-market-mumbai',
+            'https://testnet.liminal.market'))
         networks.push(new Network('Polygon', '137',
             'https://api.thegraph.com/subgraphs/name/liminal-market/liminal-market-polygon',
-            'https://rokinwgcthqy.grandmoralis.com:2053/server/functions'))
+            'https://thegraph.com/hosted-service/subgraph/liminal-market/liminal-market-polygon',
+            'https://mainnet.liminal.market'))
         return networks;
     }
 

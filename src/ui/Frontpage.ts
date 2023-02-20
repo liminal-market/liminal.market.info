@@ -56,7 +56,7 @@ export default class Frontpage {
 
     public renderVolume(dailyDatas: any): [string, string, boolean] {
         const template = Handlebars.compile(VolumeHtml);
-        let content = template({Volume: dailyDatas[0].value, GraphQL:this.queryBuilder.getQueryByName('dailyDatas')});
+        let content = template({Volume: dailyDatas[0].aUsdVolume, GraphQL:this.queryBuilder.getQueryByName('dailyDatas')});
 
         UIHelper.addToTopContent(content);
 

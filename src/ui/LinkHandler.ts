@@ -1,6 +1,7 @@
 import Wallet from "./Wallet";
 import SymbolPage from "./SymbolPage";
 import CopyHelper from "./CopyHelper";
+import NetworkInfo from "../network/NetworkInfo";
 
 export default class LinkHandler {
 
@@ -87,6 +88,10 @@ export default class LinkHandler {
                         copyLink.dataset['tooltip'] = 'Copy GraphQL';
                         copyLink.blur();
                     }, 2000)
+                })
+                let subgraph_urls = document.querySelectorAll('.subgraph_url');
+                subgraph_urls.forEach((element) => {
+                    element.setAttribute('href', NetworkInfo.Network.GraphQLPlayground);
                 })
                 modal.setAttribute('open', '');
             });
