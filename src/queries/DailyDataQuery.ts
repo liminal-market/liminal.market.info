@@ -7,7 +7,7 @@ export default class DailyDataQuery {
     public static loadLast365DataDaysNewestFirst(queryBuilder:QueryBuilder) {
 
         let q = `
-            dailyDatas(first: 365, orderBy: date, orderDirection: desc) {
+            dailyDatas(first: 90, orderBy: date, orderDirection: desc) {
                 id
                 date
                 value
