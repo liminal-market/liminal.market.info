@@ -16,7 +16,7 @@ export default class OrderQuery {
         filledQty
         filledAvgPrice
         filledAt
-        commission`;
+        serviceFee`;
 
 
     public static loadNewestOrders(queryBuilder: QueryBuilder) {
