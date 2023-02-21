@@ -4,8 +4,8 @@ import Query from "./Query";
 export default class ServiceContractsQuery {
 
     public static loadServiceContracts(queryBuilder: QueryBuilder) {
-        let str = `
-  serviceContracts {
+        let str = ` 
+  serviceContracts (where:{totalServiceFeeWei_gt:0}) {
     id
     owner
     contractAddress

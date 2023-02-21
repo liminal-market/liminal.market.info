@@ -83,7 +83,7 @@ export default class Frontpage {
 
     public renderServiceContracts(serviceContracts : any) {
         const template = Handlebars.compile(ServiceContractsHtml);
-        let content = template({Title:'Services', serviceContracts: serviceContracts});
+        let content = template({Title:'Services', serviceContracts: serviceContracts, GraphQL:this.queryBuilder.getQueryByName('serviceContracts')});
         UIHelper.appendToMiddleGrid(content);
     }
 
