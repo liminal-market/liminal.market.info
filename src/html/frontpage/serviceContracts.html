@@ -1,0 +1,33 @@
+<article class="stocks_table">
+    <h2>{{Title}}</h2> {{{formatGQL GraphQL}}}
+    <p>Below you can see the services that are using liminal.market and taking service fee.
+        <br /><br />
+        <a href="https://liminal.market/contract.html">You can set up a service</a> using liminal.market and receive revenue from it.
+        <br />
+
+    </p>
+    <figure>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Url</th>
+                <th>Total orders</th>
+                <th>Total service fee</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each serviceContracts}}
+            <tr>
+                <td>{{name}}</td>
+                <td><a href="{{url}}" target="_blank">{{url}}</a></td>
+                <td>{{number orderExecutedCount}}</td>
+                <td>{{currency totalServiceFee}}</td>
+            </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </figure>
+    <small>Note! Liminal.market is running on Testnet these are NOT real revenue, but mirror the revenue
+        a service would receive using liminal.market.</small>
+</article>

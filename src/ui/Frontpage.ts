@@ -7,6 +7,7 @@ import VolumeHtml from '../html/frontpage/volume.html'
 import SymbolsHtml from '../html/frontpage/symbols.html';
 import WalletHtml from '../html/frontpage/wallets.html';
 import OrderHtml from '../html/frontpage/orders.html';
+import ServiceContractsHtml from '../html/frontpage/serviceContracts.html';
 
 import {Chart, registerables} from "chart.js";
 import SymbolQuery from "../queries/SymbolQuery";
@@ -17,6 +18,7 @@ import SymbolPage from "./SymbolPage";
 import LinkHandler from "./LinkHandler";
 import 'chartjs-adapter-moment';
 import moment from "moment";
+import ServiceContractsQuery from "../queries/ServiceContractsQuery";
 
 export default class Frontpage {
     queryBuilder = new QueryBuilder();
@@ -30,6 +32,7 @@ export default class Frontpage {
         SymbolQuery.loadMostPopular(this.queryBuilder);
         WalletQuery.loadWalletPositionsNewestFirst(this.queryBuilder);
         OrderQuery.loadNewestOrders(this.queryBuilder);
+        ServiceContractsQuery.loadServiceContracts(this.queryBuilder);
 
         let openGraphRepository = new OpenGraphRepository();
         let result = await openGraphRepository.execute(this.queryBuilder.getQuery())
@@ -48,6 +51,7 @@ export default class Frontpage {
         this.renderOrders(result.orders);
         this.generateChart(...chart1);
         this.generateChart(...chart2);
+        this.renderServiceContracts(result.serviceContracts);
     }
 
     public addDays(date: Date, days: number) {
@@ -75,6 +79,12 @@ export default class Frontpage {
         UIHelper.addToTopContent(content);
         return [dailyData, 'tvlCanvas', true];
 
+    }
+
+    public renderServiceContracts(serviceContracts : any) {
+        const template = Handlebars.compile(ServiceContractsHtml);
+        let content = template({Title:'Services', serviceContracts: serviceContracts});
+        UIHelper.appendToMiddleGrid(content);
     }
 
     private generateChart(dayData: any, elementId: string, isTvl = true) {

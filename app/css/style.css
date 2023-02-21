@@ -135,3 +135,7 @@ article {
 .no_info {
     grid-template-columns: 1fr 4fr;
 }
+
+small {
+    font-size:0.7rem;
+}
